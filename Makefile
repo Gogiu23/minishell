@@ -6,7 +6,7 @@
 #    By: vduchi <vduchi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/22 22:11:19 by vduchi            #+#    #+#              #
-#    Updated: 2023/03/30 16:58:43 by vduchi           ###   ########.fr        #
+#    Updated: 2023/03/31 21:26:31 by gdominic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,24 +37,19 @@ LIBS_DIR		=	libs
 SRC_DIR			=	src/pipes
 OBJ_DIR			=	obj
 DEPS_DIR		=	dep
-GNL_DIR			=	get_next_line
-INC_DIR			=	inc/ ft_printf/include/ get_next_line/
+INC_DIR			=	inc
 RD_LIB			=	readline
 
 LIBFT			=	libft
-PRINTF			=	ft_printf
-ALL_LIBS		=	libft/libft.a ft_printf/libftprintf.a
+ALL_LIBS		=	libft/libft.a
 
 SRCS			=	src/pipes/pipes.c src/pipes/check_command.c src/pipes/run_commands.c \
 					src/pipes/free.c
-GNL_SRCS		=	get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 OBJS			=	$(patsubst $(SRC_DIR)/%, $(OBJ_DIR)/%, $(SRCS:.c=.o))
-GNL_OBJS		=	$(patsubst $(GNL_DIR)/%, $(GNL_DIR)/%, $(GNL_SRCS:.c=.o))
 DEPS			=	$(patsubst $(SRC_DIR)/%, $(DEPS_DIR)/%, $(SRCS:.c=.d))
-GNL_DEPS		=	$(patsubst $(GNL_DIR)/%, $(GNL_DIR)/%, $(GNL_SRCS:.c=.d))
 
 CFLAGS			+= 	-Wall -Werror -Wextra -g -O3 $(addprefix -I , $(INC_DIR))
-LDFLAGS			= 	-L ft_printf -L libft -lft -lftprintf
+LDFLAGS			= 	-L libft -lft
 DEPFLAGS		=	-MMD -MP -MF $(DEPS_DIR)/$*.d
 DEPFLAGS_GNL	=	-MMD -MP -MF $(GNL_DIR)/$*.d
 
@@ -66,13 +61,8 @@ $(OBJ_DIR)/%.o	:	$(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
 	@echo "$(YELLOW)$(patsubst $(SRC_DIR)/%,%, $<) \tcompiled!$(DEF_COLOR)"
 
-$(GNL_DIR)/%.o	:	$(GNL_DIR)/%.c
-	@$(CC) $(CFLAGS) $(DEPFLAGS_GNL) -D BUFFER_SIZE=1 -c $< -o $@
-	@echo "$(YELLOW)$(patsubst $(GNL_DIR)/%,%, $<) \tcompiled!$(DEF_COLOR)"
-
 all				:
 	@$(MAKE) -C $(LIBFT)
-	@$(MAKE) -C $(PRINTF)
 	@$(MAKE) $(NAME)
 
 $(NAME)		::
@@ -94,19 +84,15 @@ $(DEPS_DIR)	:
 clean		:
 	@$(RM) $(OBJ_DIR)
 	@$(RM) $(DEPS_DIR)
-	@$(RM) $(GNL_OBJS)
-	@$(RM) $(GNL_DEPS)
 
 fclean		:	clean
 	@$(RM) $(NAME) $(NAME_BON) $(LIBS_DIR)
 	@$(MAKE) -C libft fclean
-	@$(MAKE) -C ft_printf fclean
 	@echo "$(BLUE)\nMinishell cleaned!$(DEF_COLOR)"
 
 re			:	fclean all
 
 -include $(DEPS)
--include $(GNL_DEPS)
 
 .PHONY: all clean fclean re
 
