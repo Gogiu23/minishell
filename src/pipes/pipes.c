@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:17:24 by vduchi            #+#    #+#             */
-/*   Updated: 2023/03/30 16:41:30 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/03/31 21:11:17 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ int	pipes(char *argv[], char *env[])
 
 int	main(void)
 {
+	printf("hola\n");
 	return (0);
 }
