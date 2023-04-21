@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:18:34 by vduchi            #+#    #+#             */
-/*   Updated: 2023/03/31 21:11:34 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:35:52 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include "../libft/libft.h"
-# include "../ft_printf/include/ft_printf.h"
 
 typedef struct s_token
 {
