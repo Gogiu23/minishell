@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:17:24 by vduchi            #+#    #+#             */
-/*   Updated: 2023/04/21 11:36:22 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/04/21 16:31:58 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,8 @@ int	check_input(char **argv, char *env[], t_token *token)
 }
 */
 
-int	main(int argc, char *argv[], char *env[])
+//int	main(int argc, char *argv[], char *env[])
+int	pipes(int argc, char *argv[], char *env[])
 {
 	int		res;
 	t_token	*token;
