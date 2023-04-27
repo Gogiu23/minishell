@@ -6,11 +6,11 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:17:24 by vduchi            #+#    #+#             */
-/*   Updated: 2023/04/21 16:31:58 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/04/28 00:10:06 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipes.h"
+#include "../../inc/pipes.h"
 
 int	ft_error_out(int mode, char *arg)
 {
@@ -35,20 +35,6 @@ int	ft_error_out(int mode, char *arg)
 		i = write(2, "\n", 1);
 	}
 	return (i);
-}
-
-void	init_tokens(t_token *token)
-{
-	token[0].cmd = NULL;
-	token[0].args = NULL;
-	token[0].file = NULL;
-	token[0].before = NULL;
-	token[0].next = &token[1];
-	token[1].cmd = NULL;
-	token[1].args = NULL;
-	token[1].file = NULL;
-	token[1].before = &token[0];
-	token[1].next = NULL;
 }
 
 int	print_error(int i, char *arg)
@@ -78,6 +64,81 @@ int	print_error(int i, char *arg)
 	return (127);
 }
 
+char	**dpointer_copy(char **cmd)
+{
+	int		i;
+	char	**res;
+
+	i = 0;
+	while (cmd[i])
+		i++;
+	res = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!res)
+		return (NULL);
+	i = -1;
+	while (cmd[++i])
+	{
+		res[i] = ft_strdup(cmd[i]);
+		if (!res[i])
+			return (free_double_ret_char(res, i - 1));
+	}
+	res[i] = NULL;
+	return (res);
+}
+
+int	add_token(t_token **token, char **cmd, int mode)
+{
+	t_token	*new_tok;
+
+	new_tok = (t_token *)malloc(sizeof(t_token));
+	if (!new_tok)
+		return (1);
+	new_tok->cmd = ft_strdup(cmd[0]);
+	if (new_tok->cmd == NULL)
+		return (free_new_tok(new_tok));
+	new_tok->args = dpointer_copy(cmd);
+	if (new_tok->args == NULL)
+		return (free_new_tok(new_tok));
+	new_tok->next = NULL;
+	printf("Now\n");
+	if (!mode)
+	{
+		free(*token);
+		(*token) = new_tok;
+	}
+	else
+		(*token)->next = new_tok;
+	printf("End\n");
+	return (0);
+}
+
+int	init_tokens(t_token **token, char ***cmd)
+{
+	int		i;
+	int		res;
+	t_token	*tmp;
+
+	i = 1;
+	tmp = *token;
+	if (tmp->cmd == NULL)
+		if (add_token(token, cmd[0], 0))
+			return (1);
+	while (cmd[i] != NULL)
+	{
+		res = write(1, "Here\n", 5);
+//		printf("I: %d\n", i);
+		tmp = *token;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		if (add_token(&tmp, cmd[i], 1))
+			return (free_list(token));
+		i++;
+		printf("While\n");
+	}
+	res = 0;
+	return (res);
+}
+
 int	execute_token(char **argv, char *env[], t_token *token)
 {
 	int	res;
@@ -86,12 +147,12 @@ int	execute_token(char **argv, char *env[], t_token *token)
 	{
 		print_error(2, argv[1]);
 		token[0].fd = -1;
-		token[0].file = NULL;
+//		token[0].file = NULL;
 	}
 	else
 	{
 		token[0].fd = open(argv[1], O_RDWR);
-		token[0].file = argv[1];
+//		token[0].file = argv[1];
 	}
 	print_error(check_command(argv[2], env, &token[0]), argv[2]);
 	res = print_error(check_command(argv[3], env, &token[1]), argv[3]);
@@ -102,60 +163,37 @@ int	execute_token(char **argv, char *env[], t_token *token)
 	token[1].fd = open(argv[4], O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (token[1].fd == -1)
 		return (print_error(2, argv[4]));
-	token[1].file = argv[4];
+//	token[1].file = argv[4];
 //	printf("0:\n\tArgs 0: %s\n\tArgs 1: %s\n1:\n\tArgs 0: %s\n\tArgs 1: %s\nFd 0: %d\nFd 1: %d\nFile 0: %s\nFile 1: %s\n", token[0].args[0], token[0].args[1], token[1].args[0], token[1].args[1], token[0].fd, token[1].fd, token[0].file, token[1].file);
 	res = run_command(token, env);
 	return (res);
 }
 
-/*
-int	check_input(char **argv, char *env[], t_token *token)
+int	pipes(char ***cmds)
 {
-	int	res;
-
-	if (access(argv[1], F_OK) == -1)
-		print_error(2, argv[1]);
-	if (access(argv[1], R_OK) == -1)
-		return (print_error(2, argv[1]));
-	token[0].fd = open(argv[1], O_RDWR);
-	token[0].file = argv[1];
-	print_error(check_command(argv[2], env, &token[0]), argv[2]);
-	res = print_error(check_command(argv[3], env, &token[1]), argv[3]);
-	if (res != 0)
-		return (res);
-	token[1].fd = open(argv[4], O_RDWR | O_CREAT, 0644);
-	if (token[1].fd == -1)
-		return (print_error(2, argv[4]));
-	token[1].file = argv[4];
-//	ft_printf("Token 0:\n\tFile: %s\n\tCmd: %s\nToken 1:\n\tFile: %s\n\tCmd: %s\n",
-//			token[0].file, token[0].cmd, token[1].file, token[1].cmd);
-//	if (access(token[0].file, R_OK | W_OK) == -1)
-//		return (print_error(2, token[0].file));
-//	if (access(token[1].file, R_OK | W_OK) == -1)
-//		return (print_error(2, token[1].file));
-	return (0);
-}
-*/
-
-//int	main(int argc, char *argv[], char *env[])
-int	pipes(int argc, char *argv[], char *env[])
-{
-	int		res;
+//	int		res;
 	t_token	*token;
 
-	token = (t_token *)malloc(sizeof(t_token) * 2);
+//	res = 0;
+	token = (t_token *)malloc(sizeof(t_token));
 	if  (!token)
 		return (print_error(4, NULL));
-//	printf("\tArgc: %d\n\tArgv 1: %s\n\tArgv 2: %s\n\tArgv 3: %s\n\tArgv 4:%s\n", argc, argv[1], argv[2], argv[3], argv[4]);
-	if (argc != 5)
-		return (print_error(1, NULL));
-	init_tokens(token);
-	res = execute_token(argv, env, token);
-	free(token);
+	token->cmd = NULL;
+//	token->file = NULL;
+	token->args = NULL;
+	token->next = NULL;
+	if (init_tokens(&token, cmds))
+	{
+		free(token);
+		return (1);
+	}
+//	printf("Token: %p\n", token);
+	printf("Token 0:\n\tCmd: %s\n\tArgs; %s\nToken 1:\n\tCmd: %s\n\tArgs: %s\n", token->cmd, token->args[1], token->next->cmd, token->next->args[1]);
+//	free(token);
 //	res = check_input(argv, env, token);
 //	ft_printf("Res: %d\n", res);
-	if (res != 0)
-		return (res);
+//	if (res != 0)
+//		return (res);
 //	res = run_commands(token);
 //	if (res != 0)
 //		return (res);

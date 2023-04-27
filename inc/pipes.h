@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:18:34 by vduchi            #+#    #+#             */
-/*   Updated: 2023/04/21 16:32:24 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/04/27 23:37:02 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ typedef struct s_token
 {
 	int				fd;
 	char			*cmd;
-	char			*file;
+//	char			*file;
 	char			**args;
 	struct s_token	*next;
-	struct s_token	*before;
 }		t_token;
 
 /* ---		Check_command.c		--- */
@@ -42,6 +41,8 @@ int		run_command(t_token *token, char *env[]);
 t_token	*free_tokens(t_token *token);
 char	**free_double_ret_char(char **array, int i);
 int		free_double_ret_int(char **split, int i, int out);
-int		pipes(int argc, char *argv[], char *env[]);
+int		free_list(t_token **token);
+int		free_new_tok(t_token *token);
+int		pipes(char ***cmds);
 
 #endif
