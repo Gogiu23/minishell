@@ -6,7 +6,7 @@
 #    By: vduchi <vduchi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/22 22:11:19 by vduchi            #+#    #+#              #
-#    Updated: 2023/04/24 20:12:44 by vduchi           ###   ########.fr        #
+#    Updated: 2023/04/30 13:10:36 by vduchi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,7 @@ $(LIBFT_PATH)	:
 
 $(RD_PATH)		:
 	@echo "$(ORANGE)\nCompiling readline library...$(DEF_COLOR)"
-	@cd readline; ./configure --prefix=$(shell pwd)/readline/library --quiet; make -s; make install -s;
+	@cd readline; ./configure --prefix=$(shell pwd)/readline/library; make; make install;
 	@cp readline/libreadline.a libs/
 	@echo "$(GREEN)Readline library ready!$(DEF_COLOR)"
 

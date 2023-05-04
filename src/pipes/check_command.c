@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 19:07:09 by vduchi            #+#    #+#             */
-/*   Updated: 2023/04/21 11:36:40 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/05/01 15:32:58 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,6 +294,18 @@ int	execute_path(char **split, char *argv, t_token *token)
 }
 */
 
+
+
+
+
+
+
+
+
+
+
+
+/*
 int	free_elems(char **elems, char **split, int exit)
 {
 	int	i;
@@ -534,3 +546,4 @@ int	check_command(char *argv, char *env[], t_token *token)
 		return (4);
 	return (take_strings(split, argv, token));
 }
+*/

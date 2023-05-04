@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:18:34 by vduchi            #+#    #+#             */
-/*   Updated: 2023/04/27 23:37:02 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/05/01 15:00:39 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_token
 {
 	int				fd;
 	char			*cmd;
-//	char			*file;
 	char			**args;
 	struct s_token	*next;
 }		t_token;
@@ -43,6 +42,6 @@ char	**free_double_ret_char(char **array, int i);
 int		free_double_ret_int(char **split, int i, int out);
 int		free_list(t_token **token);
 int		free_new_tok(t_token *token);
-int		pipes(char ***cmds);
+int		pipes(char ***cmds, char *env[]);
 
 #endif
