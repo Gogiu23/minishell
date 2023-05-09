@@ -35,7 +35,7 @@ typedef struct s_token
 int		check_command(char *argv, char *env[], t_token *token);
 
 /* ---		Run_command.c		--- */
-int		run_command(t_token *token, char *env[]);
+int		run_commands(t_token **token);
 
 t_token	*free_tokens(t_token *token);
 char	**free_double_ret_char(char **array, int i);

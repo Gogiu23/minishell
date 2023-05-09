@@ -51,6 +51,8 @@ int	main(int argc, char *argv[], char *env[])
 	free(cmds[0]);
 	free(cmds[1]);
 	free(cmds);
+//	printf("Main\n");
+	cmds = NULL;
 //	printf("Cmds: \n\t%s\n\t%s\n", cmds[0][0], cmds[0][1]);
 //	free(cmds[0][0]);
 //	cmds[0][0] = ft_strdup("My first test");

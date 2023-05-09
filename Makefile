@@ -57,7 +57,7 @@ SRCS_PIPES		=	src/pipes/pipes.c src/pipes/check_command.c src/pipes/run_commands
 OBJS_PIPES		=	$(patsubst $(SRC_DIR_PIPES)/%, $(OBJ_DIR_PIPES)/%, $(SRCS_PIPES:.c=.o))
 DEPS_PIPES		=	$(patsubst $(SRC_DIR_PIPES)/%, $(DEP_DIR_PIPES)/%, $(SRCS_PIPES:.c=.d))
 
-CFLAGS			+= 	-Wall -Werror -Wextra -g -O3 $(addprefix -I , $(INC_DIR))
+CFLAGS			+= 	-Wall -Werror -Wextra -DREADLINE_LIBRARY -g -O3 $(addprefix -I , $(INC_DIR))
 LDFLAGS			= 	-L $(LIBS_DIR) -lft -lreadline -lncurses
 DFLAGS_MS		=	-MMD -MP -MF $(DEP_DIR_MS)/$*.d
 DFLAGS_PIPES	=	-MMD -MP -MF $(DEP_DIR_PIPES)/$*.d
@@ -74,7 +74,7 @@ $(OBJ_DIR_PIPES)/%.o	:	$(SRC_DIR_PIPES)/%.c
 	@$(CC) -c $< $(CFLAGS) $(DFLAGS_PIPES) -o $@
 	@echo "$(YELLOW)$(patsubst $(SRC_DIR_PIPES)/%,%, $<)   \tcompiled!$(DEF_COLOR)"
 
-all				:	directories $(RD_PATH) $(LIBFT_PATH)
+all				:	directories $(LIBFT_PATH) $(RD_PATH)
 	@$(MAKE) $(NAME)
 
 $(NAME)			::

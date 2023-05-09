@@ -80,7 +80,7 @@ char	**dpointer_copy(char **cmd)
 	{
 		res[i] = ft_strdup(cmd[i]);
 		if (!res[i])
-			return (free_double_ret_char(res, i - 1));
+			return (free_double_ret_char(res, i));
 	}
 	res[i] = NULL;
 	return (res);
@@ -164,28 +164,29 @@ int	execute_token(char **argv, char *env[], t_token *token)
 
 int	change_command(t_token **token, char **paths, char *correct_path)
 {
-	char	*tmp;
+	char	*tmp1;
+	char	*tmp2;
 
-	tmp = ft_strjoin(correct_path, "/");
-	if (!tmp)
+	tmp1 = ft_strjoin(correct_path, "/");
+	if (!tmp1)
 		return (free_double_ret_int(paths, 0, 4));
-	free((*token)->cmd);
-	(*token)->cmd = NULL;
-	(*token)->cmd = ft_strjoin(tmp, (*token)->cmd);
-	if ((*token)->cmd == NULL)
+	tmp2 = ft_strjoin(tmp1, (*token)->cmd);
+	if (!tmp2)
 	{
-		free(tmp);
+		free(tmp1);
+		tmp1 = NULL;
 		return (free_double_ret_int(paths, 0, 4));
 	}
+	free((*token)->cmd);
+	(*token)->cmd = tmp2;
+	free(tmp1);
+	tmp1 = NULL;
+	tmp2 = NULL;
 	free((*token)->args[0]);
 	(*token)->args[0] = NULL;
 	(*token)->args[0] = ft_strdup((*token)->cmd);
 	if ((*token)->args[0] == NULL)
-	{
-		free(tmp);
 		return (free_double_ret_int(paths, 0, 4));
-	}
-	free(tmp);
 	return (free_double_ret_int(paths, 0, 0));
 }
 
@@ -260,7 +261,8 @@ int	pipes(char ***cmds, char *env[])
 	res = check_tokens(&token, env);
 	if (res)
 		return (free_list(&token));
-	printf("Token 0:\n\tCmd: %s\n\tArgs; %s\nToken 1:\n\tCmd: %s\n\tArgs: %s\n", token->cmd, token->args[1], token->next->cmd, token->next->args[1]);
+	printf("Token 0:\n\tCmd: \t%s\n\tArgs: \t%s\n\t\t%s\nToken 1:\n\tCmd: \t%s\n\tArgs: \t%s\n\t\t%s\n", token->cmd, token->args[0], token->args[1], token->next->cmd, token->next->args[0], token->next->args[1]);
+	res = run_commands(&token);
 	free_list(&token);
 	return (0);
 }

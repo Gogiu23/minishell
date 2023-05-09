@@ -37,6 +37,8 @@ char	**free_double_ret_char(char **array, int i)
 	}
 	else
 	{
+		if (array == NULL)
+			return (NULL);
 		while (array[i])
 			i++;
 		while (--i >= 0)

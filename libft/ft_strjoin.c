@@ -19,10 +19,13 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	int		count;
 	char	*str;
 
-	if (!s1 || !s2)
+	if (!s1)
 		return (NULL);
 	i = ft_strlen(s1);
-	j = ft_strlen(s2);
+	if (!s2)
+		j = 0;
+	else
+		j = ft_strlen(s2);
 	count = -1;
 	str = (char *)malloc(sizeof(char) * (i + j + 1));
 	if (!str)

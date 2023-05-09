@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "pipes.h"
-
+/*
 int	run_command(t_token *token, char *env[])
 {
 //	int		j;
@@ -109,7 +109,7 @@ int	run_command(t_token *token, char *env[])
 	}
 	return (0);
 }
-
+*/
 /*
 int	run_command(t_token *token)
 {
@@ -180,3 +180,28 @@ int	run_command(t_token *token)
 	return (0);
 }
 */
+
+int	run_commands(t_token **token)
+{
+	int		status;
+	t_token	*temp;
+
+	status = 0;
+	temp = (*token);
+	while (temp != NULL)
+	{
+		if (fork() == 0)
+		{
+			printf("Child no. %d\n", getpid());
+			if (execve(temp->cmd, temp->args, NULL) == -1)
+			{
+				perror(temp->cmd);
+				exit(127);
+			}
+		}
+		wait(&status);
+		temp = temp->next;
+	}
+	temp = NULL;
+	return (0);
+}
