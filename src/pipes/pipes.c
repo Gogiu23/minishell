@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:17:24 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/01 16:02:28 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/05/17 19:53:27 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,26 +243,27 @@ int	check_tokens(t_token **token, char *env[])
 	return (change_command(token, paths, paths[i]));
 }
 
-int	pipes(char ***cmds, char *env[])
+int	pipes(t_command *tokens, char *env[])
 {
 	int		res;
-	t_token	*token;
+//	t_token	*token;
 
 	res = 0;
-	token = (t_token *)malloc(sizeof(t_token));
-	if  (!token)
-		return (print_error(4, NULL));
-	token->cmd = NULL;
-	token->args = NULL;
-	token->next = NULL;
-	res = init_tokens(&token, cmds);
-	if (res)
-		return (free_list(&token));
-	res = check_tokens(&token, env);
-	if (res)
-		return (free_list(&token));
-	printf("Token 0:\n\tCmd: \t%s\n\tArgs: \t%s\n\t\t%s\nToken 1:\n\tCmd: \t%s\n\tArgs: \t%s\n\t\t%s\n", token->cmd, token->args[0], token->args[1], token->next->cmd, token->next->args[0], token->next->args[1]);
-	res = run_commands(&token);
-	free_list(&token);
+	(void)env;
+//	token = (t_token *)malloc(sizeof(t_token));
+//	if  (!token)
+//		return (print_error(4, NULL));
+//	token->cmd = NULL;
+//	token->args = NULL;
+//	token->next = NULL;
+//	res = init_tokens(&token, cmds);
+//	if (res)
+//		return (free_list(&token));
+//	res = check_tokens(&token, env);
+//	if (res)
+//		return (free_list(&token));
+//	printf("Token 0:\n\tCmd: \t%s\n\tArgs: \t%s\n\t\t%s\nToken 1:\n\tCmd: \t%s\n\tArgs: \t%s\n\t\t%s\n", token->cmd, token->args[0], token->args[1], token->next->cmd, token->next->args[0], token->next->args[1]);
+	res = run_commands(&tokens);
+//	free_list(&token);
 	return (0);
 }

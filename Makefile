@@ -6,11 +6,20 @@
 #    By: vduchi <vduchi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/22 22:11:19 by vduchi            #+#    #+#              #
-#    Updated: 2023/04/30 13:10:36 by vduchi           ###   ########.fr        #
+#    Updated: 2023/05/18 19:50:38 by vduchi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Colors
+#=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
+
+-include directories.mk
+
+-include sources_pipes.mk
+-include sources_built_ins.mk
+-include sources_minishell.mk
+
+#=-=-=-=-=-=-=- COLORS DEFINITION =-=-=-=-=-=-=-=-=-#
+
 DEL_LINE		=	\033[2K
 ITALIC			=	\033[3m
 BOLD			=	\033[1m
@@ -31,40 +40,32 @@ MID_GRAY		=	\033[38;5;245m
 DARK_GREEN		=	\033[38;2;75;179;82m
 DARK_YELLOW		=	\033[38;5;143m
 
-NAME			=	minishell
+#=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 
-LIBS_DIR		=	libs
-SRC_DIR			=	src
-INC_DIR			=	inc readline/library/include/readline
-OBJS_DIR		=	obj
-DEPS_DIR		=	dep
-SRC_DIR_MS		=	src/general
-OBJ_DIR_MS		=	obj/general
-DEP_DIR_MS		=	dep/general
-SRC_DIR_PIPES	=	src/pipes
-OBJ_DIR_PIPES	=	obj/pipes
-DEP_DIR_PIPES	=	dep/pipes
+NAME			=	minishell
 
 RD_PATH			=	libs/libreadline.a
 LIBFT_PATH		=	libs/libft.a
 
-SRCS_MS			=	src/general/main.c
-OBJS_MS			=	$(patsubst $(SRC_DIR_MS)/%, $(OBJ_DIR_MS)/%, $(SRCS_MS:.c=.o))
-DEPS_MS			=	$(patsubst $(SRC_DIR_MS)/%, $(DEP_DIR_MS)/%, $(SRCS_MS:.c=.d))
-
-SRCS_PIPES		=	src/pipes/pipes.c src/pipes/check_command.c src/pipes/run_commands.c \
-					src/pipes/free.c
-OBJS_PIPES		=	$(patsubst $(SRC_DIR_PIPES)/%, $(OBJ_DIR_PIPES)/%, $(SRCS_PIPES:.c=.o))
-DEPS_PIPES		=	$(patsubst $(SRC_DIR_PIPES)/%, $(DEP_DIR_PIPES)/%, $(SRCS_PIPES:.c=.d))
+#=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 
 CFLAGS			+= 	-Wall -Werror -Wextra -DREADLINE_LIBRARY -g -O3 $(addprefix -I , $(INC_DIR))
 LDFLAGS			= 	-L $(LIBS_DIR) -lft -lreadline -lncurses
 DFLAGS_MS		=	-MMD -MP -MF $(DEP_DIR_MS)/$*.d
+DFLAGS_BI		=	-MMD -MP -MF $(DEP_DIR_BI)/$*.d
 DFLAGS_PIPES	=	-MMD -MP -MF $(DEP_DIR_PIPES)/$*.d
+
+#=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 
 CC				=	gcc
 RM				=	rm -rf
 MKDIR			=	mkdir -p
+
+#=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
+
+$(OBJ_DIR_BI)/%.o	:	$(SRC_DIR_BI)/%.c
+	@$(CC) -c $< $(CFLAGS) $(DFLAGS_BI) -o $@
+	@echo "$(YELLOW)$(patsubst $(SRC_DIR_BI)/%,%, $<)   \tcompiled!$(DEF_COLOR)"
 
 $(OBJ_DIR_MS)/%.o	:	$(SRC_DIR_MS)/%.c
 	@$(CC) -c $< $(CFLAGS) $(DFLAGS_MS) -o $@
@@ -80,8 +81,8 @@ all				:	directories $(LIBFT_PATH) $(RD_PATH)
 $(NAME)			::
 	@echo "$(MAGENTA)\nChecking minishell...$(DEF_COLOR)"
 
-$(NAME)			::	$(OBJS_MS) $(OBJS_PIPES)
-	@$(CC) $(OBJS_MS) $(OBJS_PIPES) $(CFLAGS) $(LDFLAGS) -o $@
+$(NAME)			::	$(OBJS_MS) $(OBJS_PIPES) $(OBJS_BI)
+	@$(CC) $(OBJS_MS) $(OBJS_PIPES) $(OBJS_BI) $(CFLAGS) $(LDFLAGS) -o $@
 	@echo "$(ORANGE)Compiling minishell exec...$(DEF_COLOR)"
 
 $(NAME)			::
@@ -103,6 +104,8 @@ directories	:
 	@$(MKDIR) $(DEPS_DIR)
 	@$(MKDIR) $(OBJ_DIR_MS)
 	@$(MKDIR) $(DEP_DIR_MS)
+	@$(MKDIR) $(OBJ_DIR_BI)
+	@$(MKDIR) $(DEP_DIR_BI)
 	@$(MKDIR) $(OBJ_DIR_PIPES)
 	@$(MKDIR) $(DEP_DIR_PIPES)
 

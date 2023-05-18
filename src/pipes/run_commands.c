@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 16:05:24 by vduchi            #+#    #+#             */
-/*   Updated: 2023/04/21 11:37:11 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/05/17 20:13:27 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,13 +181,16 @@ int	run_command(t_token *token)
 }
 */
 
-int	run_commands(t_token **token)
+int	run_commands(t_command **token)
 {
-	int		status;
-	t_token	*temp;
+	int			status;
+	int			p[2];
+	t_command	*temp;
 
 	status = 0;
 	temp = (*token);
+	if (pipe(p) == -1)
+		return (2);
 	while (temp != NULL)
 	{
 		if (fork() == 0)

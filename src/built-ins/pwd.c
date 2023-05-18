@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/30 16:14:15 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/18 14:17:37 by vduchi           ###   ########.fr       */
+/*   Created: 2023/05/18 19:51:33 by vduchi            #+#    #+#             */
+/*   Updated: 2023/05/18 19:57:21 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "built-ins.h"
 
-# include <stdio.h>
-# include "pipes.h"
-# include "built-ins.h"
-# include "../readline/library/include/readline/readline.h"
+void	ft_pwd(void)
+{
+	char	path[256];
 
-#endif
+	if (getcwd(path, sizeof(path)) == NULL)
+		exit(1);
+	printf("%s\n", path);
+}
