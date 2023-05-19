@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:18:34 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/18 17:31:45 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/05/19 13:34:48 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <sys/types.h>
-# include "minishell.h"
 # include "../libft/libft.h"
 
 typedef struct s_token

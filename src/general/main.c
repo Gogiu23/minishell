@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 16:12:32 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/17 19:59:52 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/05/19 19:39:36 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ t_command	*add_elem(char *cmd, char **args)
 
 int	main(int argc, char *argv[], char *env[])
 {
-//	int		check;
-//	char	*string;
-//
-//	check = 1;
-//	while (check)
-//	{
-//		string = readline("Try this, bitch!!: ");
-//		if (string[0] == '\0')
-//			check = 0;
-//		else
-//			printf("%s\n", string);
-//	}
+	int		check;
+	char	*string;
+
+	check = 1;
+	while (check)
+	{
+		string = readline("$> ");
+		if (string[0] == '\0')
+			check = 0;
+		else
+			printf("%s\n", string);
+	}
 //	return (0);
 //	char	***cmds;
 	char		**args;
@@ -49,17 +49,15 @@ int	main(int argc, char *argv[], char *env[])
 	(void)argv;
 	args = (char **)malloc(sizeof(char *) * 3);
 	args[0] = ft_strdup("cat");
-	args[1] = ft_strdup("-e");
+	args[1] = ft_strdup("test.txt");
 	args[2] = NULL;
 	tokens = add_elem("/bin/cat", args);
+	pipes(tokens, env);
 	if (!tokens)
 	{
 		printf("Malloc error\n");
 		return (2);
 	}
-//	free(args[0]);
-//	free(args[1]);
-//	free(args);
 	args = (char **)malloc(sizeof(char *) * 3);
 	args[0] = ft_strdup("wc");
 	args[1] = ft_strdup("-l");
@@ -70,9 +68,6 @@ int	main(int argc, char *argv[], char *env[])
 		printf("Malloc error\n");
 		return (2);
 	}
-//	free(args[0]);
-//	free(args[1]);
-//	free(args);
 	args = (char **)malloc(sizeof(char *) * 3);
 	args[0] = ft_strdup("grep");
 	args[1] = ft_strdup("Hello");
@@ -84,9 +79,6 @@ int	main(int argc, char *argv[], char *env[])
 		return (2);
 	}
 	printf("Token %p\n", tokens);
-//	free(args[0]);
-//	free(args[1]);
-//	free(args);
 //	cmds = (char ***)malloc(sizeof(char **) * 3);
 //	cmds[0] = (char **)malloc(sizeof(char *) * 3);
 //	cmds[0][0] = ft_strdup("cat");
