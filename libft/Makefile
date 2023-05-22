@@ -6,7 +6,7 @@
 #    By: vduchi <vduchi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/09 17:13:31 by vduchi            #+#    #+#              #
-#    Updated: 2022/11/16 15:57:47 by vduchi           ###   ########.fr        #
+#    Updated: 2023/05/22 00:55:37 by gdominic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRCS 		= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 			ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c \
 			ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c \
 			ft_split.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c \
-			ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_itoa.c
+			ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_itoa.c \
+			ft_putstr_error.c
 
 SRCS_BONUS	= ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 			ft_lstlast_bonus.c	ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \

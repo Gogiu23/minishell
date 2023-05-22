@@ -1976,6 +1976,7 @@ ft_print	libft/ft_putnbr_fd.c	/^static void	ft_print(int n, int sign, int fd)$/;
 ft_putchar_fd	libft/ft_putchar_fd.c	/^void	ft_putchar_fd(char c, int fd)$/;"	f
 ft_putendl_fd	libft/ft_putendl_fd.c	/^void	ft_putendl_fd(char *s, int fd)$/;"	f
 ft_putnbr_fd	libft/ft_putnbr_fd.c	/^void	ft_putnbr_fd(int n, int fd)$/;"	f
+ft_putstr_error	libft/ft_putstr_error.c	/^int	ft_putstr_error(const char *s)$/;"	f
 ft_putstr_fd	libft/ft_putstr_fd.c	/^void	ft_putstr_fd(char *s, int fd)$/;"	f
 ft_pwd	src/built-ins/pwd.c	/^void	ft_pwd(void)$/;"	f
 ft_split	libft/ft_split.c	/^char	**ft_split(const char *s, char c)$/;"	f
@@ -1995,6 +1996,7 @@ ft_substr	libft/ft_substr.c	/^char	*ft_substr(const char *s, unsigned int start,
 ft_tolower	libft/ft_tolower.c	/^int	ft_tolower(int c)$/;"	f
 ft_toupper	libft/ft_toupper.c	/^int	ft_toupper(int c)$/;"	f
 ft_unset	src/built-ins/unset.c	/^char	**ft_unset(char *env[], char *str)$/;"	f
+ft_usage	src/general/main.c	/^static	void	ft_usage()$/;"	f	file:
 ftruncate	readline/examples/rlfe/os.h	131;"	d
 func	readline/examples/fileman.c	/^  rl_icpfunc_t *func;		\/* Function to call to do the job. *\/$/;"	m	struct:__anon5	file:
 func	readline/library/share/readline/fileman.c	/^  rl_icpfunc_t *func;		\/* Function to call to do the job. *\/$/;"	m	struct:__anon7	file:
@@ -2296,6 +2298,7 @@ meta_character_bit	readline/chardefs.h	54;"	d
 meta_character_bit	readline/library/include/readline/chardefs.h	54;"	d
 meta_character_threshold	readline/chardefs.h	52;"	d
 meta_character_threshold	readline/library/include/readline/chardefs.h	52;"	d
+minishell	src/general/main.c	/^static void minishell(char *str, char **env)$/;"	f	file:
 mk_wcswidth	readline/support/wcwidth.c	/^int mk_wcswidth(const wchar_t *pwcs, size_t n)$/;"	f
 mk_wcswidth_cjk	readline/support/wcwidth.c	/^int mk_wcswidth_cjk(const wchar_t *pwcs, size_t n)$/;"	f
 mk_wcwidth	readline/support/wcwidth.c	/^int mk_wcwidth(wchar_t ucs)$/;"	f
