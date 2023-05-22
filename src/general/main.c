@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 16:12:32 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/22 02:11:27 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:49:57 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,22 @@ t_command	*add_elem(char *cmd, char **args)
 static void minishell(char *str, char **env)
 {
 	char		**args;
+	char 		**matrix;
 	t_command	*tokens;
+	int i = 0 ;
 
-	args = (char **)malloc(sizeof(char *) * 4);
-	args[0] = ft_strdup(str);
-	args[1] = ft_strdup("test.txt");
-	args[2] = ft_strjoin("/bin/", str);
-	args[3] = NULL;
+	matrix = ft_split(str, ' ');
+	while (matrix[i])
+	{
+		printf("matrix[%d]: %s\n", i, matrix[i]);
+		i++;
+	}
+	printf("matrix en el final: %s\n", matrix[3]);
+//	args = (char **)malloc(sizeof(char *) * 4);
+//	args[0] = ft_strdup(matrix[0]);
+//	args[1] = ft_strdup("test.txt");
+//	args[2] = ft_strjoin("/bin/", matrix[0]);
+//	args[3] = NULL;
 	tokens = add_elem(args[2], args);
 	pipes(tokens, env);
 	if (!tokens)
@@ -70,7 +79,7 @@ int	main(int argc, char *argv[], char *env[])
 	char	*string;
 
 	check = 1;
-	argv = NULL;
+	(void)argv;
 	if (argc <= 2)
 	{
 		while (check)
