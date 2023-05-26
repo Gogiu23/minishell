@@ -5,10 +5,11 @@
 ## Tabla de contenido
 * [Funciones](#Funciones)
     * [fork](#fork)
+    * [pipe](#pipe)
 
-### Funciones
+## Funciones
 
-## fork
+### fork
 
 la funcion `fork()` en C se utiliza para crear un nuevo proceso duplicando el proceso 
 existente. 
@@ -58,3 +59,5 @@ El proceso padre crea un nuevo proceso hijo llamado a `fork()`.
 El proceso hijo imprime su ID y el proceso padre imprime su proprio ID y el ID del proceso hijo
 Ambos procesos continuan ejecutando el codigo despues de la llamada a `fork()`, pero cada uno tiene su propria
 copia de las variables y el contexto de la funcion.
+
+### pipe
