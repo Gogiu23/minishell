@@ -7,9 +7,9 @@
     * [fork](#fork)
 
 ### Funciones
->```c
->fork
->```
+
+> fork
+
 la funcion `fork()` en C se utiliza para crear un nuevo proceso duplicando el proceso 
 existente. 
 El proceso original se llama **padre** y el nuevo proceso se llama **hijo**.
