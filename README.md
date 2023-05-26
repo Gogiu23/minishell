@@ -4,7 +4,7 @@
 
 ## Tabla de contenido
 * [Funciones](#Funciones)
-    *[fork](#fork)
+    * [fork](#fork)
 
 ### Funciones
 >```c
