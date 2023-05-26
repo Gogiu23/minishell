@@ -1,0 +1,5 @@
+esto es simplemente una prueba
+
+Si ves esto es que tu comando cat funciona
+
+felicidades
