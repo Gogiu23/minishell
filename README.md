@@ -8,7 +8,7 @@
 
 ### Funciones
 
-> fork
+## fork
 
 la funcion `fork()` en C se utiliza para crear un nuevo proceso duplicando el proceso 
 existente. 
