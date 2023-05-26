@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 16:12:32 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/22 17:58:46 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/05/26 09:43:28 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void minishell(char *str, char **env)
 		printf("matrix[%d]: %s\n", i, matrix[i]);
 		i++;
 	}
-	printf("matrix en el final: %s\n", matrix[3]);
+//	printf("matrix en el final: %s\n", matrix[3]);
 	tokens = add_elem(matrix[0], matrix);
 	pipes(tokens, env);
 	if (!tokens)

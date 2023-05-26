@@ -6,36 +6,50 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 16:05:24 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/19 18:18:06 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/05/26 11:36:43 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/pipes.h"
 
-int	run_commands(t_command **token)
+static char *get_path(char *env[], t_command *token)
 {
-	int			status;
-	int			p[2];
-	t_command	*temp;
+	char *str;
 
-	status = 0;
-	temp = (*token);
-	if (pipe(p) == -1)
-		return (2);
-	while (temp != NULL)
+	(void)env;
+	str = NULL;
+	token = 0;
+	printf("test get_path\n");
+	return (str);
+}
+
+int	run_commands(t_command *token, char *env[])
+{
+	int			pipe_fd[2];
+	pid_t		pid;
+
+	token->path = get_path(env, token);
+	printf("entramos\n");
+	if (pipe(pipe_fd) == -1)
+		perror("Error_pipe\n");
+	pid = fork();
+	printf("pid: %d\n", pid);
+	if (pid < 0)
+		perror("fork");
+	while (token)
 	{
-		if (fork() == 0)
+		if (fork() != 0)
 		{
 			printf("Child no. %d\n", getpid());
-			if (execve(temp->cmd, temp->args, NULL) == -1)
+			if (execve(token->cmd, token->args, env) == -1)
 			{
-				perror(temp->cmd);
+				perror(token->cmd);
 				exit(127);
 			}
 		}
-		wait(&status);
-		temp = temp->next;
+		wait(NULL);
+		token = token->next;
 	}
-	temp = NULL;
+	token = NULL;
 	return (0);
 }
