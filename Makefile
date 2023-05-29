@@ -6,7 +6,7 @@
 #    By: vduchi <vduchi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/22 22:11:19 by vduchi            #+#    #+#              #
-#    Updated: 2023/05/18 19:50:38 by vduchi           ###   ########.fr        #
+#    Updated: 2023/05/29 19:35:05 by vduchi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@
 -include directories.mk
 
 -include sources_pipes.mk
+-include sources_parser.mk
 -include sources_built_ins.mk
 -include sources_minishell.mk
 
@@ -54,6 +55,7 @@ LDFLAGS			= 	-L $(LIBS_DIR) -lft -lreadline -lncurses
 DFLAGS_MS		=	-MMD -MP -MF $(DEP_DIR_MS)/$*.d
 DFLAGS_BI		=	-MMD -MP -MF $(DEP_DIR_BI)/$*.d
 DFLAGS_PIPES	=	-MMD -MP -MF $(DEP_DIR_PIPES)/$*.d
+DFLAGS_PARSER	=	-MMD -MP -MF $(DEP_DIR_PARSER)/$*.d
 
 #=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 
@@ -75,14 +77,18 @@ $(OBJ_DIR_PIPES)/%.o	:	$(SRC_DIR_PIPES)/%.c
 	@$(CC) -c $< $(CFLAGS) $(DFLAGS_PIPES) -o $@
 	@echo "$(YELLOW)$(patsubst $(SRC_DIR_PIPES)/%,%, $<)   \tcompiled!$(DEF_COLOR)"
 
+$(OBJ_DIR_PARSER)/%.o	:	$(SRC_DIR_PARSER)/%.c
+	@$(CC) -c $< $(CFLAGS) $(DFLAGS_PARSER) -o $@
+	@echo "$(YELLOW)$(patsubst $(SRC_DIR_PARSER)/%,%, $<)   \tcompiled!$(DEF_COLOR)"
+
 all				:	directories $(LIBFT_PATH) $(RD_PATH)
 	@$(MAKE) $(NAME)
 
 $(NAME)			::
 	@echo "$(MAGENTA)\nChecking minishell...$(DEF_COLOR)"
 
-$(NAME)			::	$(OBJS_MS) $(OBJS_PIPES) $(OBJS_BI)
-	@$(CC) $(OBJS_MS) $(OBJS_PIPES) $(OBJS_BI) $(CFLAGS) $(LDFLAGS) -o $@
+$(NAME)			::	$(OBJS_MS) $(OBJS_PIPES) $(OBJS_BI) $(OBJS_PARSER)
+	@$(CC) $^ $(CFLAGS) $(LDFLAGS) -o $@
 	@echo "$(ORANGE)Compiling minishell exec...$(DEF_COLOR)"
 
 $(NAME)			::
