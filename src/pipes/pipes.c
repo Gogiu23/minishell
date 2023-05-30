@@ -6,37 +6,36 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:17:24 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/26 10:58:35 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/05/30 21:55:54 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/pipes.h"
 
-int	pipes(t_command *tokens, char *env[])
+int	pipes(t_minishell *tokens, char *env[])
 {
-//	int		i = 0;
-	int		res;
+	int			res;
+	t_command	*tmp;
 
+	tmp = tokens->command;
 	res = 0;
-	while (tokens) 
+	while (tmp)
 	{
-	    printf("Command: %s\n", tokens->cmd);
+	    printf("Command: %s\n", tmp->cmd);
 	    printf("Arguments:\n");
-	    char **args = tokens->args;
+	    char **args = tmp->args;
 	    while (*args) 
 		{
 	        printf(" - %s\n", *args);
 	        args++;
 	    }
 	    printf("\n");
-	    tokens = tokens->next;  // Avanzar al siguiente nodo de la lista
+	    tmp = tmp->next;  // Avanzar al siguiente nodo de la lista
 	}
-//	while (env[i])
-//	{
-//		printf("%s\n", env[i]);
-//		i++;
-//	}
-	res = run_commands(tokens, env);
+	if (check_command(tokens, env) == 0)
+		res = run_commands(tokens->command, env);
+	else
+		ft_putstr_error("BUILTIN pending manage\n");
 	printf("res: %d\n", res);
 	return (0);
 }

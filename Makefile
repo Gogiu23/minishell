@@ -6,7 +6,7 @@
 #    By: vduchi <vduchi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/22 22:11:19 by vduchi            #+#    #+#              #
-#    Updated: 2023/05/30 14:22:35 by vduchi           ###   ########.fr        #
+#    Updated: 2023/05/30 19:41:18 by gdominic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@
 -include sources_parser.mk
 -include sources_built_ins.mk
 -include sources_minishell.mk
+-include sources_tester.mk
 
 #=-=-=-=-=-=-=- COLORS DEFINITION =-=-=-=-=-=-=-=-=-#
 
@@ -56,6 +57,7 @@ DFLAGS_MS		=	-MMD -MP -MF $(DEP_DIR_MS)/$*.d
 DFLAGS_BI		=	-MMD -MP -MF $(DEP_DIR_BI)/$*.d
 DFLAGS_PIPES	=	-MMD -MP -MF $(DEP_DIR_PIPES)/$*.d
 DFLAGS_PARSER	=	-MMD -MP -MF $(DEP_DIR_PARSER)/$*.d
+DFLAGS_TESTER	=	-MMD -MP -MF $(DEP_DIR_TESTER)/$*.d
 
 #=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 
@@ -81,13 +83,17 @@ $(OBJ_DIR_PARSER)/%.o	:	$(SRC_DIR_PARSER)/%.c
 	@$(CC) -c $< $(CFLAGS) $(DFLAGS_PARSER) -o $@
 	@echo "$(YELLOW)$(patsubst $(SRC_DIR_PARSER)/%,%, $<)   \tcompiled!$(DEF_COLOR)"
 
+$(OBJ_DIR_TESTER)/%.o	:	$(SRC_DIR_TESTER)/%.c
+	@$(CC) -c $< $(CFLAGS) $(DFLAGS_TESTER) -o $@
+	@echo "$(YELLOW)$(patsubst $(SRC_DIR_TESTER)/%,%, $<)   \tcompiled!$(DEF_COLOR)"
+
 all				:	directories $(LIBFT_PATH) $(RD_PATH)
 	@$(MAKE) $(NAME)
 
 $(NAME)			::
 	@echo "$(MAGENTA)\nChecking minishell...$(DEF_COLOR)"
 
-$(NAME)			::	$(OBJS_MS) $(OBJS_PIPES) $(OBJS_BI) $(OBJS_PARSER)
+$(NAME)			::	$(OBJS_MS) $(OBJS_PIPES) $(OBJS_BI) $(OBJS_PARSER) $(OBJS_TESTER)
 	@$(CC) $^ $(CFLAGS) $(LDFLAGS) -o $@
 	@echo "$(ORANGE)Compiling minishell exec...$(DEF_COLOR)"
 
@@ -116,6 +122,8 @@ directories	:
 	@$(MKDIR) $(DEP_DIR_PIPES)
 	@$(MKDIR) $(OBJ_DIR_PARSER)
 	@$(MKDIR) $(DEP_DIR_PARSER)
+	@$(MKDIR) $(OBJ_DIR_TESTER)
+	@$(MKDIR) $(DEP_DIR_TESTER)
 
 
 clean			:
@@ -135,6 +143,7 @@ re				:	fclean all
 -include $(DEPS_BI)
 -include $(DEPS_PIPES)
 -include $(DEPS_PARSER)
+-include $(DEPS_TESTER)
 
 .PHONY: all clean fclean re
 

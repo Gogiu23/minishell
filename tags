@@ -160,12 +160,14 @@ DEL_LINE	libft/Makefile	/^DEL_LINE	=	\\033[2K$/;"	m
 DEPS	libft/Makefile	/^DEPS		=	$(SRCS:.c=.d)$/;"	m
 DEPS_BI	sources_built_ins.mk	/^DEPS_BI	=	$(patsubst $(SRC_DIR_BI)\/%, $(DEP_DIR_BI)\/%, $(SRCS_BI:.c=.d))$/;"	m
 DEPS_BONUS	libft/Makefile	/^DEPS_BONUS	=	$(SRCS_BONUS:.c=.d)$/;"	m
-DEPS_DIR	directories.mk	/^DEPS_DIR		=	dep$/;"	m
+DEPS_DIR	directories.mk	/^DEPS_DIR			=	dep$/;"	m
 DEPS_MS	sources_minishell.mk	/^DEPS_MS			=	$(patsubst $(SRC_DIR_MS)\/%, $(DEP_DIR_MS)\/%, $(SRCS_MS:.c=.d))$/;"	m
+DEPS_PARSER	sources_parser.mk	/^DEPS_PARSER	=	$(patsubst $(SRC_DIR_PARSER)\/%, $(DEP_DIR_PARSER)\/%, $(SRCS_PARSER:.c=.d))$/;"	m
 DEPS_PIPES	sources_pipes.mk	/^DEPS_PIPES	=	$(patsubst $(SRC_DIR_PIPES)\/%, $(DEP_DIR_PIPES)\/%, $(SRCS_PIPES:.c=.d))$/;"	m
-DEP_DIR_BI	directories.mk	/^DEP_DIR_BI		=	dep\/built-ins$/;"	m
-DEP_DIR_MS	directories.mk	/^DEP_DIR_MS		=	dep\/general$/;"	m
-DEP_DIR_PIPES	directories.mk	/^DEP_DIR_PIPES	=	dep\/pipes$/;"	m
+DEP_DIR_BI	directories.mk	/^DEP_DIR_BI			=	dep\/built-ins$/;"	m
+DEP_DIR_MS	directories.mk	/^DEP_DIR_MS			=	dep\/general$/;"	m
+DEP_DIR_PARSER	directories.mk	/^DEP_DIR_PARSER		=	dep\/parser$/;"	m
+DEP_DIR_PIPES	directories.mk	/^DEP_DIR_PIPES		=	dep\/pipes$/;"	m
 DEP_FLAGS	libft/Makefile	/^DEP_FLAGS	=	-MMD -MP$/;"	m
 DESTDIR	readline/Makefile	/^DESTDIR =$/;"	m
 DESTDIR	readline/doc/Makefile	/^DESTDIR =$/;"	m
@@ -173,6 +175,7 @@ DESTDIR	readline/examples/Makefile	/^DESTDIR =$/;"	m
 DESTDIR	readline/shlib/Makefile	/^DESTDIR =$/;"	m
 DFLAGS_BI	Makefile	/^DFLAGS_BI		=	-MMD -MP -MF $(DEP_DIR_BI)\/$*.d$/;"	m
 DFLAGS_MS	Makefile	/^DFLAGS_MS		=	-MMD -MP -MF $(DEP_DIR_MS)\/$*.d$/;"	m
+DFLAGS_PARSER	Makefile	/^DFLAGS_PARSER	=	-MMD -MP -MF $(DEP_DIR_PARSER)\/$*.d$/;"	m
 DFLAGS_PIPES	Makefile	/^DFLAGS_PIPES	=	-MMD -MP -MF $(DEP_DIR_PIPES)\/$*.d$/;"	m
 DISPLAY_TABS	readline/library/include/readline/rlconf.h	49;"	d
 DISPLAY_TABS	readline/rlconf.h	49;"	d
@@ -362,7 +365,7 @@ INCL_DOSPROCESS	readline/readline.c	63;"	d	file:
 INCL_DOSPROCESS	readline/text.c	49;"	d	file:
 INCREMENT_POS	readline/vi_mode.c	68;"	d	file:
 INCREMENT_POS	readline/vi_mode.c	76;"	d	file:
-INC_DIR	directories.mk	/^INC_DIR			=	inc readline\/library\/include\/readline$/;"	m
+INC_DIR	directories.mk	/^INC_DIR				=	inc readline\/library\/include\/readline$/;"	m
 INFOOBJ	readline/doc/Makefile	/^INFOOBJ = readline.info history.info rluserman.info$/;"	m
 INSTALL	readline/Makefile	/^INSTALL = \/usr\/bin\/install -c$/;"	m
 INSTALL	readline/doc/Makefile	/^INSTALL = \/usr\/bin\/install -c$/;"	m
@@ -438,7 +441,7 @@ LFLAG_SET	readline/rltty.c	102;"	d	file:
 LIBFT_H	libft/libft.h	14;"	d
 LIBFT_PATH	Makefile	/^LIBFT_PATH		=	libs\/libft.a$/;"	m
 LIBRARY_NAME	readline/Makefile	/^LIBRARY_NAME = libreadline.a$/;"	m
-LIBS_DIR	directories.mk	/^LIBS_DIR		=	libs$/;"	m
+LIBS_DIR	directories.mk	/^LIBS_DIR			=	libs$/;"	m
 LN	readline/shlib/Makefile	/^LN = ln$/;"	m
 LOCAL_CFLAGS	readline/Makefile	/^LOCAL_CFLAGS =  -DRL_LIBRARY_VERSION='"$(RL_LIBRARY_VERSION)"' -DBRACKETED_PASTE_DEFAULT=1$/;"	m
 LOCAL_CFLAGS	readline/examples/Makefile	/^LOCAL_CFLAGS =  -DREADLINE_LIBRARY -DRL_LIBRARY_VERSION='"$(RL_LIBRARY_VERSION)"'$/;"	m
@@ -531,12 +534,14 @@ OBJEXT	readline/examples/Makefile	/^OBJEXT = o$/;"	m
 OBJS	libft/Makefile	/^OBJS		=	$(SRCS:.c=.o)$/;"	m
 OBJS_BI	sources_built_ins.mk	/^OBJS_BI	=	$(patsubst $(SRC_DIR_BI)\/%, $(OBJ_DIR_BI)\/%, $(SRCS_BI:.c=.o))$/;"	m
 OBJS_BONUS	libft/Makefile	/^OBJS_BONUS	=	$(SRCS_BONUS:.c=.o)$/;"	m
-OBJS_DIR	directories.mk	/^OBJS_DIR		=	obj$/;"	m
+OBJS_DIR	directories.mk	/^OBJS_DIR			=	obj$/;"	m
 OBJS_MS	sources_minishell.mk	/^OBJS_MS			=	$(patsubst $(SRC_DIR_MS)\/%, $(OBJ_DIR_MS)\/%, $(SRCS_MS:.c=.o))$/;"	m
+OBJS_PARSER	sources_parser.mk	/^OBJS_PARSER	=	$(patsubst $(SRC_DIR_PARSER)\/%, $(OBJ_DIR_PARSER)\/%, $(SRCS_PARSER:.c=.o))$/;"	m
 OBJS_PIPES	sources_pipes.mk	/^OBJS_PIPES	=	$(patsubst $(SRC_DIR_PIPES)\/%, $(OBJ_DIR_PIPES)\/%, $(SRCS_PIPES:.c=.o))$/;"	m
-OBJ_DIR_BI	directories.mk	/^OBJ_DIR_BI		=	obj\/built-ins$/;"	m
-OBJ_DIR_MS	directories.mk	/^OBJ_DIR_MS		=	obj\/general$/;"	m
-OBJ_DIR_PIPES	directories.mk	/^OBJ_DIR_PIPES	=	obj\/pipes$/;"	m
+OBJ_DIR_BI	directories.mk	/^OBJ_DIR_BI			=	obj\/built-ins$/;"	m
+OBJ_DIR_MS	directories.mk	/^OBJ_DIR_MS			=	obj\/general$/;"	m
+OBJ_DIR_PARSER	directories.mk	/^OBJ_DIR_PARSER		=	obj\/parser$/;"	m
+OBJ_DIR_PIPES	directories.mk	/^OBJ_DIR_PIPES		=	obj\/pipes$/;"	m
 OCTVALUE	readline/chardefs.h	122;"	d
 OCTVALUE	readline/library/include/readline/chardefs.h	122;"	d
 OLD_CPOS_IN_PROMPT	readline/display.c	1266;"	d	file:
@@ -585,6 +590,7 @@ PARAMS	readline/library/include/readline/rlstdc.h	33;"	d
 PARAMS	readline/library/include/readline/rlstdc.h	35;"	d
 PARAMS	readline/rlstdc.h	33;"	d
 PARAMS	readline/rlstdc.h	35;"	d
+PARSER_H	inc/parser.h	14;"	d
 PATH_MAX	readline/histfile.c	114;"	d	file:
 PATTERN_SEARCH	readline/histlib.h	74;"	d
 PC	readline/tcap.h	41;"	d
@@ -878,11 +884,13 @@ SRCS	libft/Makefile	/^SRCS 		= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii
 SRCS_BI	sources_built_ins.mk	/^SRCS_BI	=	src\/built-ins\/exit.c$/;"	m
 SRCS_BONUS	libft/Makefile	/^SRCS_BONUS	= ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \\$/;"	m
 SRCS_MS	sources_minishell.mk	/^SRCS_MS			=	src\/general\/main.c$/;"	m
+SRCS_PARSER	sources_parser.mk	/^SRCS_PARSER	=	src\/parser\/parser.c$/;"	m
 SRCS_PIPES	sources_pipes.mk	/^SRCS_PIPES	=	src\/pipes\/pipes.c$/;"	m
-SRC_DIR	directories.mk	/^SRC_DIR			=	src$/;"	m
-SRC_DIR_BI	directories.mk	/^SRC_DIR_BI		=	src\/built-ins$/;"	m
-SRC_DIR_MS	directories.mk	/^SRC_DIR_MS		=	src\/general$/;"	m
-SRC_DIR_PIPES	directories.mk	/^SRC_DIR_PIPES	=	src\/pipes$/;"	m
+SRC_DIR	directories.mk	/^SRC_DIR				=	src$/;"	m
+SRC_DIR_BI	directories.mk	/^SRC_DIR_BI			=	src\/built-ins$/;"	m
+SRC_DIR_MS	directories.mk	/^SRC_DIR_MS			=	src\/general$/;"	m
+SRC_DIR_PARSER	directories.mk	/^SRC_DIR_PARSER		=	src\/parser$/;"	m
+SRC_DIR_PIPES	directories.mk	/^SRC_DIR_PIPES		=	src\/pipes$/;"	m
 STATIC_CALLBACK	readline/readline.c	419;"	d	file:
 STATIC_CALLBACK	readline/readline.c	421;"	d	file:
 STATIC_LIBS	readline/Makefile	/^STATIC_LIBS = libreadline.a libhistory.a$/;"	m
@@ -1749,6 +1757,7 @@ buflen	readline/library/include/readline/readline.h	/^  int buflen;$/;"	m	struct
 buflen	readline/readline.h	/^  int buflen;$/;"	m	struct:readline_state
 builtin_keymap_names	readline/bind.c	/^static struct name_and_keymap builtin_keymap_names[] = {$/;"	v	typeref:struct:name_and_keymap	file:
 bzero	readline/examples/rlfe/os.h	137;"	d
+calculate_length	src/parser/parser.c	/^int	*calculate_length(char *str, int *len_words)$/;"	f
 catchsigs	readline/library/include/readline/readline.h	/^  int catchsigs;$/;"	m	struct:readline_state
 catchsigs	readline/readline.h	/^  int catchsigs;$/;"	m	struct:readline_state
 catchsigwinch	readline/library/include/readline/readline.h	/^  int catchsigwinch;$/;"	m	struct:readline_state
@@ -1764,6 +1773,7 @@ change_prompt	readline/examples/excallback.c	/^change_prompt(void)$/;"	f
 change_prompt	readline/library/share/readline/excallback.c	/^change_prompt(void)$/;"	f
 char_type	readline/examples/readlinebuf.h	/^	typedef char char_type;$/;"	t	class:readlinebuf
 chardev	readline/colors.h	/^    chardev,$/;"	e	enum:filetype
+check_string	src/parser/quotes.c	/^void	check_string(char *str, int *quotes, int *j)$/;"	f
 child	readline/examples/rlfe/rlfe.c	/^static pid_t child = -1;$/;"	v	file:
 childval	readline/rlprivate.h	/^  int childval;$/;"	m	struct:__rl_keyseq_context
 clear_history	readline/history.c	/^clear_history (void)$/;"	f
@@ -1792,6 +1802,7 @@ com_stat	readline/examples/fileman.c	/^com_stat (arg)$/;"	f
 com_stat	readline/library/share/readline/fileman.c	/^com_stat (arg)$/;"	f
 com_view	readline/examples/fileman.c	/^com_view (arg)$/;"	f
 com_view	readline/library/share/readline/fileman.c	/^com_view (arg)$/;"	f
+command	inc/pipes.h	/^	t_command	*command;$/;"	m	struct:s_minishell
 command_generator	readline/examples/fileman.c	/^command_generator (text, state)$/;"	f
 command_generator	readline/library/share/readline/fileman.c	/^command_generator (text, state)$/;"	f
 commands	readline/examples/fileman.c	/^COMMAND commands[] = {$/;"	v
@@ -1811,9 +1822,11 @@ control_character_mask	readline/library/include/readline/chardefs.h	51;"	d
 control_character_threshold	readline/chardefs.h	50;"	d
 control_character_threshold	readline/library/include/readline/chardefs.h	50;"	d
 copy_history_entry	readline/history.c	/^copy_history_entry (HIST_ENTRY *hist)$/;"	f
+correct_quotes	src/parser/quotes.c	/^int	correct_quotes(char **split, int index)$/;"	f
 count	readline/rlprivate.h	/^  int count;$/;"	m	struct:__rl_callback_generic_arg
 count	readline/rlprivate.h	/^  int count;$/;"	m	struct:_rl_cmd
 count_words	libft/ft_split.c	/^static int	count_words(const char *s, char c)$/;"	f	file:
+count_words	src/parser/parser.c	/^int	*count_words(char *str, int *words)$/;"	f
 cpos_adjusted	readline/display.c	/^static int cpos_adjusted;$/;"	v	file:
 cpos_buffer_position	readline/display.c	/^static int cpos_buffer_position;$/;"	v	file:
 cr	readline/display.c	/^cr (void)$/;"	f	file:
@@ -1906,8 +1919,6 @@ false	readline/colors.h	48;"	d
 fcopy	readline/examples/rlcat.c	/^fcopy(fp)$/;"	f	file:
 fcopy	readline/library/share/readline/rlcat.c	/^fcopy(fp)$/;"	f	file:
 fd	inc/pipes.h	/^	int				fd;$/;"	m	struct:s_token
-fd_in	inc/pipes.h	/^	int					fd_in;$/;"	m	struct:s_command
-fd_out	inc/pipes.h	/^	int					fd_out;$/;"	m	struct:s_command
 fd_set	readline/examples/rlfe/os.h	/^typedef struct fd_set { int fds_bits[1]; } fd_set;$/;"	s
 fd_set	readline/examples/rlfe/os.h	/^typedef struct fd_set { int fds_bits[1]; } fd_set;$/;"	t	typeref:struct:fd_set
 fds_bits	readline/examples/rlfe/os.h	/^typedef struct fd_set { int fds_bits[1]; } fd_set;$/;"	m	struct:fd_set
@@ -1921,6 +1932,7 @@ fileman_completion	readline/examples/fileman.c	/^fileman_completion (text, start
 fileman_completion	readline/library/share/readline/fileman.c	/^fileman_completion (text, start, end)$/;"	f
 filename_completion_function	readline/compat.c	/^filename_completion_function (const char *s, int i)$/;"	f
 filetype	readline/colors.h	/^enum filetype$/;"	g
+fill_words	src/parser/parser.c	/^int	fill_words(char **split, char *str, int *len_words, int index)$/;"	f
 find_boolean_var	readline/bind.c	/^find_boolean_var (const char *name)$/;"	f	file:
 find_codeset	readline/nls.c	/^find_codeset (char *name, size_t *lenp)$/;"	f	file:
 find_command	readline/examples/fileman.c	/^find_command (name)$/;"	f
@@ -1940,17 +1952,24 @@ fnwidth	readline/complete.c	/^fnwidth (const char *string)$/;"	f	file:
 forced_display	readline/display.c	/^static int forced_display;$/;"	v	file:
 free_double_pointer	src/built-ins/export.c	/^char	**free_double_pointer(char **arr, int i)$/;"	f
 free_history_entry	readline/history.c	/^free_history_entry (HIST_ENTRY *hist)$/;"	f
+free_len	src/parser/utils.c	/^char	**free_len(int **len_words)$/;"	f
+free_my_split	src/parser/utils.c	/^char	**free_my_split(char **split, int **len_words, int i)$/;"	f
+free_split	src/parser/utils.c	/^int	free_split(char **split, int i)$/;"	f
+free_split_with_index	src/parser/utils.c	/^int	free_split_with_index(char **split, int index, int i)$/;"	f
 free_undo_list	readline/compat.c	/^free_undo_list (void)$/;"	f
 freewords	readline/histexpand.c	/^freewords (char **words, int start)$/;"	f	file:
 ft_atoi	libft/ft_atoi.c	/^int	ft_atoi(const char *str)$/;"	f
 ft_bzero	libft/ft_bzero.c	/^void	ft_bzero(void *s, size_t n)$/;"	f
 ft_calloc	libft/ft_calloc.c	/^void	*ft_calloc(size_t count, size_t size)$/;"	f
+ft_cd	src/built-ins/cd.c	/^void	ft_cd(char *path)$/;"	f
 ft_count	libft/ft_itoa.c	/^static int	ft_count(long int n)$/;"	f	file:
 ft_count	libft/ft_putnbr_fd.c	/^static int	ft_count(int n, int fd)$/;"	f	file:
 ft_count	libft/ft_strlcat.c	/^static size_t	ft_count(char *dst, const char *src, int control)$/;"	f	file:
+ft_echo	src/built-ins/echo.c	/^void	ft_echo(char *str)$/;"	f
 ft_env	src/built-ins/env.c	/^void	ft_env(char *env[])$/;"	f
 ft_exit	src/built-ins/exit.c	/^void	ft_exit(void)$/;"	f
 ft_export	src/built-ins/export.c	/^char	**ft_export(char *env[], char *new_string)$/;"	f
+ft_find_path	src/pipes/run_commands.c	/^char *ft_find_path(char *env[])$/;"	f
 ft_int_to_str	libft/ft_itoa.c	/^static char	*ft_int_to_str(char *str, long int n, int sign, int len)$/;"	f	file:
 ft_isalnum	libft/ft_isalnum.c	/^int	ft_isalnum(int c)$/;"	f
 ft_isalpha	libft/ft_isalpha.c	/^int	ft_isalpha(int c)$/;"	f
@@ -2305,6 +2324,7 @@ mk_wcwidth	readline/support/wcwidth.c	/^int mk_wcwidth(wchar_t ucs)$/;"	f
 mk_wcwidth_cjk	readline/support/wcwidth.c	/^int mk_wcwidth_cjk(wchar_t ucs)$/;"	f
 mkfifo	readline/examples/rlfe/os.h	392;"	d
 mkfifo	readline/examples/rlfe/os.h	393;"	d
+modify_string	src/parser/quotes.c	/^void	modify_string(char *str, int *quote, int new_value, int *index)$/;"	f
 modmark	readline/display.c	/^static int modmark;$/;"	v	file:
 motion	readline/rlprivate.h	/^  int key, motion;	\/* initial key, motion command *\/$/;"	m	struct:__rl_vimotion_context
 msg_buf	readline/display.c	/^static char *msg_buf = 0;$/;"	v	file:
@@ -2393,11 +2413,13 @@ out_to_inferior_fd	readline/examples/rlfe/rlfe.c	/^static int out_to_inferior_fd
 outf	readline/library/include/readline/readline.h	/^  FILE *outf;$/;"	m	struct:readline_state
 outf	readline/readline.h	/^  FILE *outf;$/;"	m	struct:readline_state
 parse_comparison_op	readline/bind.c	/^parse_comparison_op (s, indp)$/;"	f	file:
+parse_string	src/parser/parser.c	/^char	**parse_string(char *str)$/;"	f
 parser_directives	readline/bind.c	/^} parser_directives [] = {$/;"	v	typeref:struct:__anon1	file:
 parser_else	readline/bind.c	/^parser_else (char *args)$/;"	f	file:
 parser_endif	readline/bind.c	/^parser_endif (char *args)$/;"	f	file:
 parser_if	readline/bind.c	/^parser_if (char *args)$/;"	f	file:
 parser_include	readline/bind.c	/^parser_include (char *args)$/;"	f	file:
+path	inc/pipes.h	/^	char		**path;$/;"	m	struct:s_minishell
 path_isdir	readline/complete.c	/^path_isdir (const char *filename)$/;"	f	file:
 pathname_alphabetic_chars	readline/util.c	/^static const char * const pathname_alphabetic_chars = "\/-_=~.#$";$/;"	v	file:
 pbackfail	readline/examples/readlinebuf.h	/^	virtual int_type pbackfail( int_type c = eof ) {$/;"	f	class:readlinebuf
@@ -2406,7 +2428,7 @@ pending_bytes_length	readline/text.c	/^static int pending_bytes_length = 0;$/;"	
 pending_special_char	readline/examples/rlfe/rlfe.c	/^char pending_special_char;$/;"	v
 pendingin	readline/library/include/readline/readline.h	/^  int pendingin;$/;"	m	struct:readline_state
 pendingin	readline/readline.h	/^  int pendingin;$/;"	m	struct:readline_state
-pipes	src/pipes/pipes.c	/^int	pipes(t_command *tokens, char *env[])$/;"	f
+pipes	src/pipes/pipes.c	/^int	pipes(t_minishell *tokens, char *env[])$/;"	f
 pkgconfigdir	readline/Makefile	/^pkgconfigdir = ${libdir}\/pkgconfig$/;"	m
 pmb	readline/rlprivate.h	/^  char pmb[MB_LEN_MAX];$/;"	m	struct:__rl_search_context
 point	readline/library/include/readline/readline.h	/^  int point;$/;"	m	struct:readline_state
@@ -2472,6 +2494,7 @@ putenv_buf2	readline/shell.c	/^static char putenv_buf2[INT_STRLEN_BOUND (int) + 
 puts_face	readline/display.c	/^puts_face (const char *str, const char *face, int n)$/;"	f	file:
 pututline	readline/examples/rlfe/os.h	269;"	d
 quote_breaks	readline/histexpand.c	/^quote_breaks (char *s)$/;"	f	file:
+quotes_check	src/parser/utils.c	/^void	quotes_check(char *c, int *quotes)$/;"	f
 read_history	readline/histfile.c	/^read_history (const char *filename)$/;"	f
 read_history_range	readline/histfile.c	/^read_history_range (const char *filename, int from, int to)$/;"	f
 readline	readline/readline.c	/^readline (const char *prompt)$/;"	f
@@ -2970,7 +2993,7 @@ rltest_timeout_readline2	readline/examples/rl-timeout.c	/^rltest_timeout_readlin
 rltest_timeout_readline2	readline/library/share/readline/rl-timeout.c	/^rltest_timeout_readline2 ()$/;"	f
 rltty_set_default_bindings	readline/rltty.c	/^rltty_set_default_bindings (Keymap kmap)$/;"	f
 rltty_warning	readline/rltty.c	/^rltty_warning (char *msg)$/;"	f	file:
-run_commands	src/pipes/run_commands.c	/^int	run_commands(t_command **token)$/;"	f
+run_commands	src/pipes/run_commands.c	/^int	run_commands(t_command *token, char *env[])$/;"	f
 run_startup_hooks	readline/readline.c	/^run_startup_hooks (void)$/;"	f	file:
 running	readline/examples/rl-callbacktest.c	/^int running, sigwinch_received;$/;"	v
 running	readline/examples/rl-timeout.c	/^int running;$/;"	v
@@ -2979,6 +3002,7 @@ running	readline/library/share/readline/rl-timeout.c	/^int running;$/;"	v
 running_in_emacs	readline/readline.c	/^static int running_in_emacs;$/;"	v	file:
 s_command	inc/pipes.h	/^typedef struct s_command$/;"	s
 s_list	libft/libft.h	/^typedef struct s_list$/;"	s
+s_minishell	inc/pipes.h	/^typedef struct s_minishell$/;"	s
 s_token	inc/pipes.h	/^typedef struct s_token$/;"	s
 sa_flags	readline/signals.c	/^typedef struct { SigHandler *sa_handler; int sa_mask, sa_flags; } sighandler_cxt;$/;"	m	struct:__anon9	file:
 sa_handler	readline/signals.c	/^typedef struct { SigHandler *sa_handler; int sa_mask, sa_flags; } sighandler_cxt;$/;"	m	struct:__anon9	file:
@@ -3149,6 +3173,7 @@ t_intr	readline/rltty.h	/^  unsigned char t_intr;$/;"	m	struct:_rl_tty_chars
 t_kill	readline/rltty.h	/^  unsigned char t_kill;$/;"	m	struct:_rl_tty_chars
 t_list	libft/libft.h	/^}	t_list;$/;"	t	typeref:struct:s_list
 t_lnext	readline/rltty.h	/^  unsigned char t_lnext;$/;"	m	struct:_rl_tty_chars
+t_minishell	inc/pipes.h	/^}	t_minishell;$/;"	t	typeref:struct:s_minishell
 t_quit	readline/rltty.h	/^  unsigned char t_quit;$/;"	m	struct:_rl_tty_chars
 t_reprint	readline/rltty.h	/^  unsigned char t_reprint;$/;"	m	struct:_rl_tty_chars
 t_start	readline/rltty.h	/^  unsigned char t_start;$/;"	m	struct:_rl_tty_chars
@@ -3233,6 +3258,7 @@ undo_list	readline/readline.h	/^typedef struct undo_list {$/;"	s
 unknown	readline/colors.h	/^    unknown,$/;"	e	enum:filetype
 unstifle_history	readline/history.c	/^unstifle_history (void)$/;"	f
 update_line	readline/display.c	/^update_line (char *old, char *old_face, char *new, char *new_face, int current_line, int omax, int nmax, int inv_botlin)$/;"	f	file:
+update_string	src/parser/quotes.c	/^int	update_string(char **str)$/;"	f
 usage	readline/examples/hist_erasedups.c	/^usage()$/;"	f	file:
 usage	readline/examples/hist_purgecmd.c	/^usage()$/;"	f	file:
 usage	readline/examples/rl.c	/^usage()$/;"	f	file:

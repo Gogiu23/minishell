@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:40:46 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/30 17:23:11 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/05/30 17:52:55 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,30 +121,30 @@ char	**parse_string(char *str)
 	return (free_my_split(split, &len_words, i + 1));
 }
 
-int	main(void)
-{
-	int		check;
-	char	*string;
-
-	check = 1;
-	while (check)
-	{
-		string = readline("$> ");
-		if (string[0] == '\0')
-		{
-			free(string);
-			string = NULL;
-			check = 0;
-		}
-		else
-		{
-			parse_string(string);
-			free(string);
-			string = NULL;
-		}
-	}
-	return (0);
-}
+//int	main(void)
+//{
+//	int		check;
+//	char	*string;
+//
+//	check = 1;
+//	while (check)
+//	{
+//		string = readline("$> ");
+//		if (string[0] == '\0')
+//		{
+//			free(string);
+//			string = NULL;
+//			check = 0;
+//		}
+//		else
+//		{
+//			parse_string(string);
+//			free(string);
+//			string = NULL;
+//		}
+//	}
+//	return (0);
+//}
 
 //char	**parser(char *str)
 //{

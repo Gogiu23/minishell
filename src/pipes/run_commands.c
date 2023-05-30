@@ -6,13 +6,13 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 16:05:24 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/30 05:14:22 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/05/30 21:55:14 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/pipes.h"
 
-static char *ft_find_path(char *env[])
+char *ft_find_path(char *env[])
 {
 	int i;
 
@@ -26,15 +26,32 @@ static char *ft_find_path(char *env[])
 	return (NULL);
 }
 
-static void get_path(char *env[], t_command *token)
+static int is_builtin(char *str)
 {
-	token = (t_command *)malloc(sizeof(t_command));
-	if (!token)
-		exit (EXIT_FAILURE);
-	printf("test get_path\n");
-	token->path = ft_find_path(env);
-	token->next = NULL;
-	printf("token->path: %s\n", token->path);
+	if (!ft_strncmp("echo", str, 4))
+		return (1);
+	else if (!ft_strncmp("cd", str, 2))
+		return (2);
+	else if (!ft_strncmp("pwd", str, 3))
+		return (3);
+	else if (!ft_strncmp("export", str, 6))
+		return (4);
+	else if (!ft_strncmp("unset", str, 5))
+		return (5);
+	else if (!ft_strncmp("env", str, 3))
+		return (6);
+	else if (!ft_strncmp("exit", str, 4))
+		return (7);
+	return (0);
+}
+
+int check_command(t_minishell *cmd, char **env)
+{
+	(void)env;
+	char	*str = cmd->command->args[0];
+	if (is_builtin(str) == 0)
+		return (0);
+	return (1);
 }
 
 int	run_commands(t_command *token, char *env[])
@@ -42,29 +59,29 @@ int	run_commands(t_command *token, char *env[])
 	int			pipe_fd[2];
 	pid_t		pid;
 
-	get_path(env, token);
- 	execve("/bin/cat", token->args, env);
+	if (fork() == 0)
+		printf("%p\n", token);
+	execve("/bin/cat", token->args, env);
 	if (pipe(pipe_fd) == -1)
 		perror("Error_pipe\n");
 	pid = fork();
-//	exit (0);
 	printf("pid: %d\n", pid);
 	if (pid < 0)
 		perror("fork");
-	while (token)
-	{
-		if (fork() != 0)
-		{
-			printf("Child no. %d\n", getpid());
-			if (execve(token->cmd, token->args, env) == -1)
-			{
-				perror(token->cmd);
-				exit(127);
-			}
-		}
-		wait(NULL);
-		token = token->next;
-	}
-	token = NULL;
+//	while (token)
+//	{
+//		if (fork() == 0)
+//		{
+//			printf("Child no. %d\n", getpid());
+//			if (execve(token->cmd, token->args, env) == -1)
+//			{
+//				perror(token->cmd);
+//				exit(127);
+//			}
+//		}
+//		wait(NULL);
+//		token = token->next;
+//	}
+//	token = NULL;
 	return (0);
 }

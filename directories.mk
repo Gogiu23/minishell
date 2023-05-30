@@ -6,7 +6,7 @@
 #    By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/18 19:45:46 by vduchi            #+#    #+#              #
-#    Updated: 2023/05/29 19:29:20 by vduchi           ###   ########.fr        #
+#    Updated: 2023/05/30 19:48:58 by gdominic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,3 +27,6 @@ DEP_DIR_BI			=	dep/built-ins
 SRC_DIR_PARSER		=	src/parser
 OBJ_DIR_PARSER		=	obj/parser
 DEP_DIR_PARSER		=	dep/parser
+SRC_DIR_TESTER		=	src/tester
+OBJ_DIR_TESTER		=	obj/tester
+DEP_DIR_TESTER		=	dep/tester

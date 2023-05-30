@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 16:12:32 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/26 09:43:28 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/05/30 20:00:04 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_command	*add_elem(char *cmd, char **args)
 static void minishell(char *str, char **env)
 {
 	char 		**matrix;
-	t_command	*tokens;
+	t_minishell	*tokens;
 	int i = 0 ;
 
 	matrix = ft_split(str, ' ');
@@ -38,16 +38,19 @@ static void minishell(char *str, char **env)
 		i++;
 	}
 //	printf("matrix en el final: %s\n", matrix[3]);
-	tokens = add_elem(matrix[0], matrix);
+	tokens = malloc(sizeof(t_minishell));
+	tokens->path = ft_split(ft_find_path(env), ':');
+	ft_printer(tokens, env);
+	tokens->command = add_elem(matrix[0], matrix);
+	if (!tokens)
+		ft_putstr_error("Malloc error\n");
+//	tokens->command->next = add_elem(matrix[1], matrix);
+//	if (!tokens)
+//		ft_putstr_error("Malloc error\n");
+//	tokens->command->next->next = add_elem(matrix[2], matrix);
+//	if (!tokens->next->next)
+//		ft_putstr_error("Malloc error\n");
 	pipes(tokens, env);
-	if (!tokens)
-		ft_putstr_error("Malloc error\n");
-	tokens->next = add_elem(matrix[2], matrix);
-	if (!tokens)
-		ft_putstr_error("Malloc error\n");
-	tokens->next->next = add_elem(matrix[2], matrix);
-	if (!tokens->next->next)
-		ft_putstr_error("Malloc error\n");
 	printf("Token %p\n", tokens);
 }
 
