@@ -6,7 +6,7 @@
 #    By: vduchi <vduchi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/22 22:11:19 by vduchi            #+#    #+#              #
-#    Updated: 2023/05/29 19:35:05 by vduchi           ###   ########.fr        #
+#    Updated: 2023/05/30 14:22:35 by vduchi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,6 +114,8 @@ directories	:
 	@$(MKDIR) $(DEP_DIR_BI)
 	@$(MKDIR) $(OBJ_DIR_PIPES)
 	@$(MKDIR) $(DEP_DIR_PIPES)
+	@$(MKDIR) $(OBJ_DIR_PARSER)
+	@$(MKDIR) $(DEP_DIR_PARSER)
 
 
 clean			:
@@ -130,7 +132,9 @@ fclean			:	clean
 re				:	fclean all
 
 -include $(DEPS_MS)
+-include $(DEPS_BI)
 -include $(DEPS_PIPES)
+-include $(DEPS_PARSER)
 
 .PHONY: all clean fclean re
 

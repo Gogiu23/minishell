@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:40:46 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/29 18:53:19 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/05/30 15:39:24 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	fill_words(char **split, char *str, int *len_words, int index)
 	while (++i < index)
 	{
 		if (i == 0)
-			split[i] = ft_substr(str, len_words[0], len_words[1]);
+			split[i] = ft_substr(str, len_words[0], len_words[1] - len_words[0]);
 		else
 		{
 			l = len_words[i];
@@ -109,14 +109,14 @@ char	**parse_string(char *str)
 	len_words = count_words(str, &index);
 	if (!len_words)
 		return (NULL);
-	while (++i <= index)
-		printf("Word index: %d\n", len_words[i]);
+//	while (++i <= index)
+//		printf("Word index: %d\n", len_words[i]);
 	split = (char **)malloc(sizeof(char *) * (index + 1));
 	if (!split)
 		return (free_len(&len_words));
 	if (!fill_words(split, str, len_words, index))
 		return (free_len(&len_words));
-	i = -1;
+//	i = -1;
 	while (++i < index)
 		printf("Word: %s-->\n", split[i]);
 	return (free_my_split(split, &len_words, i + 1));

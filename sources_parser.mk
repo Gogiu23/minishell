@@ -1,17 +1,17 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    source_parser.mk                                   :+:      :+:    :+:    #
+#    sources_parser.mk                                  :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/29 19:06:12 by vduchi            #+#    #+#              #
-#    Updated: 2023/05/29 19:28:05 by vduchi           ###   ########.fr        #
+#    Updated: 2023/05/30 14:25:08 by vduchi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS_PARSER	=	src/parser/parser.c
-SRCS_PARSER	+=	src/pipes/run_commands.c
+SRCS_PARSER	+=	src/parser/utils.c
 
 OBJS_PARSER	=	$(patsubst $(SRC_DIR_PARSER)/%, $(OBJ_DIR_PARSER)/%, $(SRCS_PARSER:.c=.o))
 DEPS_PARSER	=	$(patsubst $(SRC_DIR_PARSER)/%, $(DEP_DIR_PARSER)/%, $(SRCS_PARSER:.c=.d))
