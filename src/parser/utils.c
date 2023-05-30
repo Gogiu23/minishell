@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 18:50:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/29 18:53:26 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/05/30 16:58:03 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,25 @@ char	**free_my_split(char **split, int **len_words, int i)
 	return (NULL);
 }
 
+int	free_split_with_index(char **split, int index, int i)
+{
+	while (--index >= 0)
+	{
+		if (index == i)
+			continue ;
+		free(split[i]);
+	}
+	free(split);
+	split = NULL;
+	return (1);
+}
+
 int	free_split(char **split, int i)
 {
 	while (--i >= 0)
 		free(split[i]);
 	free(split);
-	return (0);
+	return (1);
 }
 
 char	**free_len(int **len_words)

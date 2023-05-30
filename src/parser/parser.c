@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:40:46 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/30 15:39:24 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/05/30 17:23:11 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	fill_words(char **split, char *str, int *len_words, int index)
 			return (free_split(split, i));
 	}
 	split[i] = NULL;
-	return (1);
+	return (0);
 }
 
 char	**parse_string(char *str)
@@ -109,16 +109,15 @@ char	**parse_string(char *str)
 	len_words = count_words(str, &index);
 	if (!len_words)
 		return (NULL);
-//	while (++i <= index)
-//		printf("Word index: %d\n", len_words[i]);
 	split = (char **)malloc(sizeof(char *) * (index + 1));
 	if (!split)
 		return (free_len(&len_words));
-	if (!fill_words(split, str, len_words, index))
+	if (fill_words(split, str, len_words, index))
 		return (free_len(&len_words));
-//	i = -1;
 	while (++i < index)
 		printf("Word: %s-->\n", split[i]);
+	if (correct_quotes(split, index + 1))
+		return (free_len(&len_words));
 	return (free_my_split(split, &len_words, i + 1));
 }
 
