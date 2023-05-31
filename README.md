@@ -7,6 +7,7 @@
     * [fork](#fork)
     * [pipe](#pipe)
     * [execve](#execve)
+    * [access](#access)
 
 ## Funciones
 
@@ -195,3 +196,50 @@ variable `errno` con el codigo de error correspondiente:
 [ETXTBSY]       The new process file is a pure procedure (shared text) file that is currently open
                         for writing or reading by some process.
 ```
+
+### access
+
+La función `access()` en C se utiliza para verificar si un archivo o directorio tiene ciertos permisos específicos. 
+Permite determinar si el usuario actual tiene permisos para leer, escribir o ejecutar un archivo o directorio.
+
+Aquí está su firma:
+
+```c
+int access(const char *path, int mode);
+```
+
+La función `access()` toma dos argumentos: `path` y `mode`. `path` es una cadena que representa la ruta al archivo o directorio que se desea verificar, y 
+`mode` especifica los permisos que se desean verificar. Puede ser una combinación de las siguientes constantes definidas en la biblioteca `unistd.h`:
+
+- `R_OK`: Comprueba si el archivo o directorio es legible.
+- `W_OK`: Comprueba si el archivo o directorio es escribible.
+- `X_OK`: Comprueba si el archivo o directorio es ejecutable.
+- `F_OK`: Comprueba si el archivo o directorio existe.
+
+La función `access()` devuelve 0 si los permisos especificados están disponibles para el archivo o directorio, 
+y devuelve -1 si no están disponibles o si se produce algún error. 
+En caso de error, se puede utilizar la función `errno` para determinar el motivo específico del error.
+
+Aquí hay un ejemplo de cómo usar la función `access()` para verificar si un archivo es legible y escribible:
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    const char *filename = "archivo.txt";
+
+    if (access(filename, R_OK | W_OK) == 0) {
+        printf("El archivo es legible y escribible.\n");
+    } else {
+        perror("No se pueden acceder al archivo");
+        return 1;
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, se verifica si el archivo "archivo.txt" es legible y escribible utilizando la función `access()` con los permisos `R_OK` y `W_OK`. 
+Si los permisos están disponibles, se muestra un mensaje indicando que el archivo es legible y escribible. 
+De lo contrario, se imprime un mensaje de error utilizando `perror()`.
