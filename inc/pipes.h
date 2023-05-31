@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:18:34 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/26 11:17:35 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/05/30 20:33:33 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,18 @@ typedef struct s_token
 typedef struct s_command
 {
 	int					n;
-	char				*path;
 	char				*cmd;
 	char				**args;
 	struct s_command	*next;
 }	t_command;
 
-/* ---		Check_command.c		--- */
-//char	*just_the_command(char *argv);
-int		check_command(char *argv, char *env[], t_token *token);
+typedef struct s_minishell
+{
+	char		**path;
+	t_command	*command;
+}	t_minishell;
+
+int		check_command(t_minishell *comands, char **env);
 
 /* ---		Run_command.c		--- */
 int		run_commands(t_command *token, char *env[]);
@@ -51,6 +54,8 @@ char	**free_double_ret_char(char **array, int i);
 int		free_double_ret_int(char **split, int i, int out);
 int		free_list(t_token **token);
 int		free_new_tok(t_token *token);
-int		pipes(t_command *tokens, char *env[]);
+int		pipes(t_minishell *tokens, char *env[]);
+char 	*ft_find_path(char *env[]);
+void	ft_printer(t_minishell *command, char **env);
 
 #endif

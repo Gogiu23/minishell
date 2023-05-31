@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   printer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: gdominic <gdominic@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 17:32:30 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/26 17:09:42 by vduchi           ###   ########.fr       */
+/*   Created: 2023/05/30 19:30:16 by gdominic          #+#    #+#             */
+/*   Updated: 2023/05/30 20:15:39 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built-ins.h"
+#include "../../inc/pipes.h"
 
-void	ft_echo(char *str)
+void	ft_printer(t_minishell *command, char **env)
 {
-	printf("%s\n", str);
+	char	**paths;
+
+	(void)env;
+	paths = command->path;
+	printf("Paths:\n");
+	while (*paths)
+	{
+		printf("-%s\n", *paths);
+		paths++;
+	}
+	printf("\n");
 }
