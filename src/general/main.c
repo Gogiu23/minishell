@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 16:12:32 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/30 20:00:04 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/05/31 05:22:27 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,16 @@ static void minishell(char *str, char **env)
 {
 	char 		**matrix;
 	t_minishell	*tokens;
-	int i = 0 ;
+//	int i = 0 ;
 
+	if (!str)
+		return ;
 	matrix = ft_split(str, ' ');
-	while (matrix[i])
-	{
-		printf("matrix[%d]: %s\n", i, matrix[i]);
-		i++;
-	}
+//	while (matrix[i])
+//	{
+//		printf("matrix[%d]: %s\n", i, matrix[i]);
+//		i++;
+//	}
 //	printf("matrix en el final: %s\n", matrix[3]);
 	tokens = malloc(sizeof(t_minishell));
 	tokens->path = ft_split(ft_find_path(env), ':');
@@ -54,31 +56,30 @@ static void minishell(char *str, char **env)
 	printf("Token %p\n", tokens);
 }
 
-static	void	ft_usage()
+static void sigintHandler(int sig)
 {
-	write(2, "Illegal option\nusage: minishell [-help]\n", 40);
-	exit (EXIT_FAILURE);
+	(void)sig;
+	exit (0);
 }
 
 int	main(int argc, char *argv[], char *env[])
 {
-	int		check;
 	char	*string;
 
-	check = 1;
 	(void)argv;
-	if (argc <= 2)
+	if (argc == 1)
 	{
-		while (check)
+		while (SIGINT)
 		{
-			string = readline("$> ");
-			if (string[0] == '\0')
-				check = 0;
-			else
+			signal(SIGINT, sigintHandler);
+			string = readline("\033[1;32m min\033[1;37mis\033[1;31mhell\033[0;0m> ");
+			if (ft_strncmp(string, "", 1))
+			{
 				minishell(string, env);
+				free (string);
+			}
+			free (string);
 		}
 	}
-	else
-		ft_usage();
 	return (0);
 }

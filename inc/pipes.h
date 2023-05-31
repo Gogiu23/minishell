@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:18:34 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/30 20:33:33 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/05/31 05:27:14 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_command
 typedef struct s_minishell
 {
 	char		**path;
+	char		*b_path;
 	t_command	*command;
 }	t_minishell;
 
