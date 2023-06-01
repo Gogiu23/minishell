@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 16:05:24 by vduchi            #+#    #+#             */
-/*   Updated: 2023/06/01 18:12:21 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/06/01 21:37:27 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static	int	is_cmd(t_command *token)
 	(void)token;
 	if (ft_strncmp(token->cmd, "cat", ft_strlen(token->cmd)) != 0)
 		return (-2);
-	if (access("/bin/cat", F_OK) == 0)
+	if (access("/bin/cat", F_OK | X_OK) == 0)
 		return (0);
-	printf("Voy a devolver -1");
+	perror("Access invalid");
 	return (-1);
 }
 		
@@ -72,16 +72,12 @@ int	run_commands(t_command *token, char *env[])
 	int		exit_status;
 	int		status;
 
-//	pid = fork();
-//	printf("pid: %d\n", pid);
 	if ((pid = fork()) == 0)
 	{
 		if (is_cmd(token) == 0)
-		{
 			execve("/bin/cat", token->args, env);
-			wait (NULL);
-		}
-		perror("execve");
+		printf("errno: %d\n", errno);
+		perror("Error execve");
 		return (1);
 	}
 	else if (pid > 0)

@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:40:46 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/31 15:54:28 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/06/01 20:45:16 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,49 +108,51 @@ t_command	*parse_string(char *str)
 	t_command	*tokens;
 
 	i = -1;
+	tokens = NULL;
 	index = 0;
 	len_words = count_words(str, &index);
 	if (!len_words)
 		return (NULL);
 	split = (char **)malloc(sizeof(char *) * (index + 1));
-	if (!split)
-		return (free_len(&len_words));
-	if (fill_words(split, str, len_words, index))
-		return (free_len(&len_words));
+	//	Tutto qua sotto da errore vecio al compilare 😳
+//	if (!split)
+//		return (free_len(&len_words));
+//	if (fill_words(split, str, len_words, index))
+//		return (free_len(&len_words));
 	while (++i < index)
 		printf("Word: %s-->\n", split[i]);
-	if (correct_quotes(split, index + 1))
-		return (free_len(&len_words));
-	tokens = load_commands(split);
+//	if (correct_quotes(split, index + 1))
+//		return (free_len(&len_words));
+//	tokens = load_commands(split);
 	free_my_split(split, &len_words, i + 1);
 	return (tokens);
 }
 
-int	main(void)
-{
-	int			check;
-	char		*string;
-	t_command	*tokens;
-
-	check = 1;
-	while (check)
-	{
-		string = readline("$> ");
-		if (string[0] == '\0')
-		{
-			free(string);
-			string = NULL;
-			check = 0;
-		}
-		else
-		{
-			tokens = parse_string(string);
-			free(string);
-			string = NULL;
-		}
-	}
-	return (0);
-}
+//int	main(void)
+//{
+//	int			check;
+//	char		*string;
+//	t_command	*tokens;
+//
+//	check = 1;
+//	while (check)
+//	{
+//		string = readline("$> ");
+//		if (string[0] == '\0')
+//		{
+//			free(string);
+//			string = NULL;
+//			check = 0;
+//		}
+//		else
+//		{
+//			tokens = parse_string(string);
+//			free(string);
+//			string = NULL;
+//		}
+//	}
+//	return (0);
+//}
 
 //char	**parser(char *str)
 //{
