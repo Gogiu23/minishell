@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:18:34 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/31 05:27:14 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:11:00 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_token
 typedef struct s_command
 {
 	int					n;
+	int					in;
+	int					out;
 	char				*cmd;
 	char				**args;
 	struct s_command	*next;

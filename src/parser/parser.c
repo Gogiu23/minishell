@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:40:46 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/30 17:52:55 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/05/31 15:54:28 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,37 @@ int	*calculate_length(char *str, int *len_words)
 	return (len_words);
 }
 
+char	*take_word(char *str, int *len_words, int i, int index)
+{
+	int		l;
+	char	*new;
+
+	l = len_words[i];
+	while (str[l] == ' ')
+		l++;
+	if (i == (index - 1) && str[len_words[i + 1]] != ' '
+		&& str[len_words[i + 1] + 1] == '\0')
+		new = ft_substr(str, l, len_words[i + 1] - l + 1);
+	else
+		new = ft_substr(str, l, len_words[i + 1] - l);
+	return (new);
+}
+
+int	fill_words(char **split, char *str, int *len_words, int index)
+{
+	int	i;
+
+	i = -1;
+	while (++i < index)
+	{
+		split[i] = take_word(str, len_words, i, index);
+		if (!split[i])
+			return (free_split(split, i));
+	}
+	split[i] = NULL;
+	return (0);
+}
+
 int	*count_words(char *str, int *words)
 {
 	int	i;
@@ -68,41 +99,13 @@ int	*count_words(char *str, int *words)
 	return (calculate_length(str, len_words));
 }
 
-int	fill_words(char **split, char *str, int *len_words, int index)
+t_command	*parse_string(char *str)
 {
-	int	i;
-	int	l;
-
-	i = -1;
-	l = -1;
-	while (++i < index)
-	{
-		if (i == 0)
-			split[i] = ft_substr(str, len_words[0], len_words[1] - len_words[0]);
-		else
-		{
-			l = len_words[i];
-			while (str[l] == ' ')
-				l++;
-			if (i == (index - 1) && str[len_words[i + 1]] != ' '
-				&& str[len_words[i + 1] + 1] == '\0')
-				split[i] = ft_substr(str, l, len_words[i + 1] - l + 1);
-			else
-				split[i] = ft_substr(str, l, len_words[i + 1] - l);
-		}
-		if (!split[i])
-			return (free_split(split, i));
-	}
-	split[i] = NULL;
-	return (0);
-}
-
-char	**parse_string(char *str)
-{
-	int		i;
-	int		index;
-	int		*len_words;
-	char	**split;
+	int			i;
+	int			index;
+	int			*len_words;
+	char		**split;
+	t_command	*tokens;
 
 	i = -1;
 	index = 0;
@@ -118,33 +121,36 @@ char	**parse_string(char *str)
 		printf("Word: %s-->\n", split[i]);
 	if (correct_quotes(split, index + 1))
 		return (free_len(&len_words));
-	return (free_my_split(split, &len_words, i + 1));
+	tokens = load_commands(split);
+	free_my_split(split, &len_words, i + 1);
+	return (tokens);
 }
 
-//int	main(void)
-//{
-//	int		check;
-//	char	*string;
-//
-//	check = 1;
-//	while (check)
-//	{
-//		string = readline("$> ");
-//		if (string[0] == '\0')
-//		{
-//			free(string);
-//			string = NULL;
-//			check = 0;
-//		}
-//		else
-//		{
-//			parse_string(string);
-//			free(string);
-//			string = NULL;
-//		}
-//	}
-//	return (0);
-//}
+int	main(void)
+{
+	int			check;
+	char		*string;
+	t_command	*tokens;
+
+	check = 1;
+	while (check)
+	{
+		string = readline("$> ");
+		if (string[0] == '\0')
+		{
+			free(string);
+			string = NULL;
+			check = 0;
+		}
+		else
+		{
+			tokens = parse_string(string);
+			free(string);
+			string = NULL;
+		}
+	}
+	return (0);
+}
 
 //char	**parser(char *str)
 //{
