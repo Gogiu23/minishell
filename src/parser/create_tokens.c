@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   create_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 17:41:42 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/31 15:05:41 by vduchi           ###   ########.fr       */
+/*   Created: 2023/05/31 15:56:41 by vduchi            #+#    #+#             */
+/*   Updated: 2023/05/31 16:20:21 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "../../inc/parser.h"
 
-# include "minishell.h"
+t_command	*load_commands(char **split)
+{
+	int	i;
+	int	after_pipe;
 
-int		free_split(char **split, int i);
-char	**free_len(int **len_words);
-void	quotes_check(char *c, int *quotes);
-int		correct_quotes(char **split, int index);
-char	**free_my_split(char **split, int **len_words, int i);
-int		free_split_with_index(char **split, int index, int i);
-
-#endif
+	i = -1;
+	while (split[++i])
+	{
+		if (i == 0 && split[i][0] == '|' && split[i][1] == '\0')
+			return (NULL); // Qui si dovrebbe ritornare un errore e non eseguire nessun comando
+	}
+}

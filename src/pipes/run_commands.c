@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 16:05:24 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/31 16:42:17 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/06/01 21:37:27 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,34 +54,45 @@ int check_command(t_minishell *cmd, char **env)
 		return (0);
 	return (1);
 }
+
+static	int	is_cmd(t_command *token)
+{
+	(void)token;
+	if (ft_strncmp(token->cmd, "cat", ft_strlen(token->cmd)) != 0)
+		return (-2);
+	if (access("/bin/cat", F_OK | X_OK) == 0)
+		return (0);
+	perror("Access invalid");
+	return (-1);
+}
 		
 int	run_commands(t_command *token, char *env[])
 {
-//	int			pipe_fd[2];
-//	pid_t		pid;
+	pid_t	pid;
+	int		exit_status;
+	int		status;
 
-//	if (fork() == 0)
-//		printf("%p\n", token);
-	execve("/bin/cat", token->args, env);
-//	if (pipe(pipe_fd) == -1)
-//		perror("Error_pipe\n");
-//	pid = fork();
-//	printf("pid: %d\n", pid);
-//	if (pid < 0)
-//		perror("fork");
-//	while (token)
-//	{
-//		if (fork() == 0)
-//		{
-//			printf("Child no. %d\n", getpid());
-//			if (execve(token->cmd, token->args, env) == -1)
-//			{
-//				perror(token->cmd);
-//				exit(127);
-//			}
-//		}
-//		wait(NULL);
-//		token = token->next;
-//	}
+	if ((pid = fork()) == 0)
+	{
+		if (is_cmd(token) == 0)
+			execve("/bin/cat", token->args, env);
+		printf("errno: %d\n", errno);
+		perror("Error execve");
+		return (1);
+	}
+	else if (pid > 0)
+	{
+		waitpid(pid, &status, 0);
+		if (WIFEXITED(status))
+		{
+			exit_status = WIFEXITED(status);
+			printf("Codice uscita child: %d\n", exit_status);
+		}
+	}
+	else
+	{
+		perror("fork");
+		return(1);
+	}
 	return (0);
 }
