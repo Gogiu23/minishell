@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 16:05:24 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/31 05:53:28 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:42:17 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,18 @@ int check_command(t_minishell *cmd, char **env)
 		
 int	run_commands(t_command *token, char *env[])
 {
-	int			pipe_fd[2];
-	pid_t		pid;
+//	int			pipe_fd[2];
+//	pid_t		pid;
 
-	if (fork() == 0)
-		printf("%p\n", token);
+//	if (fork() == 0)
+//		printf("%p\n", token);
 	execve("/bin/cat", token->args, env);
-	if (pipe(pipe_fd) == -1)
-		perror("Error_pipe\n");
-	pid = fork();
-	printf("pid: %d\n", pid);
-	if (pid < 0)
-		perror("fork");
+//	if (pipe(pipe_fd) == -1)
+//		perror("Error_pipe\n");
+//	pid = fork();
+//	printf("pid: %d\n", pid);
+//	if (pid < 0)
+//		perror("fork");
 //	while (token)
 //	{
 //		if (fork() == 0)
@@ -83,6 +83,5 @@ int	run_commands(t_command *token, char *env[])
 //		wait(NULL);
 //		token = token->next;
 //	}
-
 	return (0);
 }

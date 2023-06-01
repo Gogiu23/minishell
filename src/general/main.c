@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 16:12:32 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/31 05:22:27 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:30:40 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void minishell(char *str, char **env)
 //	printf("matrix en el final: %s\n", matrix[3]);
 	tokens = malloc(sizeof(t_minishell));
 	tokens->path = ft_split(ft_find_path(env), ':');
-	ft_printer(tokens, env);
+//	ft_printer(tokens, env);
 	tokens->command = add_elem(matrix[0], matrix);
 	if (!tokens)
 		ft_putstr_error("Malloc error\n");
