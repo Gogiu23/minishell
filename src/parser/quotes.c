@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 16:01:29 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/30 17:08:48 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/05/31 03:47:40 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	correct_quotes(char **split, int index)
 	quotes[0] = 0;
 	quotes[1] = 0;
 	index = 0;
+	(void)index;
 	while (split[++i])
 	{
 		j = -1;
