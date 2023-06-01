@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 16:12:32 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/31 16:30:40 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:49:37 by gdominic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ int	main(int argc, char *argv[], char *env[])
 		{
 			signal(SIGINT, sigintHandler);
 			string = readline("\033[1;32m min\033[1;37mis\033[1;31mhell\033[0;0m> ");
-			if (ft_strncmp(string, "", 1))
+			if (string[0] != '\0')
 			{
 				minishell(string, env);
 				free (string);
 			}
-			free (string);
+//			free (string);
 		}
 	}
 	return (0);
