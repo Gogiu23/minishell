@@ -8,10 +8,11 @@
     * [pipe](#pipe)
     * [execve](#execve)
     * [access](#access)
+    * [perror](#perror)
 
 ## Funciones
 
-### fork
+### fork( )
 
 la funcion `fork()` en C se utiliza para crear un nuevo proceso duplicando el proceso 
 existente. 
@@ -62,7 +63,7 @@ El proceso hijo imprime su ID y el proceso padre imprime su proprio ID y el ID d
 Ambos procesos continuan ejecutando el codigo despues de la llamada a `fork()`, pero cada uno tiene su propria
 copia de las variables y el contexto de la funcion.
 
-### pipe
+### pipe( )
 
 La funcion `pipe()` se utiliza para crear descriptores de archivo
 interconectados. 
@@ -117,7 +118,7 @@ int main() {
 ```
 En este ejemplo, se crea un pipe con pipe(). Luego, se crea un proceso hijo utilizando fork(). El proceso padre escribe la cadena "Hola, hijo!" en el extremo de escritura del pipe usando write(). El proceso hijo lee la cadena del extremo de lectura del pipe usando read(). Luego, ambos procesos cierran los descriptores de archivo no utilizados.
 
-### execve
+### execve( )
 
 La funcion `execve()` se utiliza para ejecutar un programa externo desde otro programa.
 Se crea una imagen nueva que remplaza la actual del programa que se esta ejecutando.
@@ -197,7 +198,7 @@ variable `errno` con el codigo de error correspondiente:
                         for writing or reading by some process.
 ```
 
-### access
+### access( )
 
 La función `access()` en C se utiliza para verificar si un archivo o directorio tiene ciertos permisos específicos. 
 Permite determinar si el usuario actual tiene permisos para leer, escribir o ejecutar un archivo o directorio.
@@ -243,3 +244,42 @@ int main() {
 En este ejemplo, se verifica si el archivo "archivo.txt" es legible y escribible utilizando la función `access()` con los permisos `R_OK` y `W_OK`. 
 Si los permisos están disponibles, se muestra un mensaje indicando que el archivo es legible y escribible. 
 De lo contrario, se imprime un mensaje de error utilizando `perror()`.
+
+### perror( )
+
+La funcion `perror( )` desribe un mensaje de error por la salida estandard. Recibe como argumento una cadena de caracteres que se
+utilizara como prefijo en el mensaje de error.
+
+La funcion `perror()` se encuentra en la biblioteca de C `stdio.h`. Su declaracion es la siguiente:
+```c
+void    perror(const char *str);
+```
+
+Obtiene la descripcion de error de la variable `errno`, la cual es una variable global definida en `errno.h`.
+Dicha variable almacena el numero del ultimo error encontrado en el programa. `perror()` toma ese numero de error y busca 
+una cadena descriptiva correspondiente en una tabla interna.
+
+Por lo tanto, el mensaje impreso es una concatenacion de la cadena `str` seguida de la descripcion del error obtenida a partir
+de `errno`.
+
+***Ejemplo***
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+
+int main() {
+    FILE *file = fopen("archivo_inexistente.txt", "r");
+    if (file == NULL) {
+        perror("Error al abrir el archivo");
+        exit(EXIT_FAILURE);
+    }
+
+    // Resto del código...
+
+    return 0;
+}
+```
+
+> Si quieremos ver el valor de ***errno*** podemos escribir en bash `echo $?` y tendremos el valor actual de la variable 
+`ERRNO`.
