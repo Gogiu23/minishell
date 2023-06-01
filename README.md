@@ -4,7 +4,7 @@
 
 ## Tabla de contenido
 * [Funciones](#Funciones)
-    * [fork](#fork(-))
+    * [fork](#fork)
     * [pipe](#pipe)
     * [execve](#execve)
     * [access](#access)
@@ -12,7 +12,7 @@
 
 ## Funciones
 
-### fork( )
+### fork
 
 la funcion `fork()` en C se utiliza para crear un nuevo proceso duplicando el proceso 
 existente. 
@@ -63,7 +63,7 @@ El proceso hijo imprime su ID y el proceso padre imprime su proprio ID y el ID d
 Ambos procesos continuan ejecutando el codigo despues de la llamada a `fork()`, pero cada uno tiene su propria
 copia de las variables y el contexto de la funcion.
 
-### pipe( )
+### pipe
 
 La funcion `pipe()` se utiliza para crear descriptores de archivo
 interconectados. 
@@ -118,7 +118,7 @@ int main() {
 ```
 En este ejemplo, se crea un pipe con pipe(). Luego, se crea un proceso hijo utilizando fork(). El proceso padre escribe la cadena "Hola, hijo!" en el extremo de escritura del pipe usando write(). El proceso hijo lee la cadena del extremo de lectura del pipe usando read(). Luego, ambos procesos cierran los descriptores de archivo no utilizados.
 
-### execve( )
+### execve
 
 La funcion `execve()` se utiliza para ejecutar un programa externo desde otro programa.
 Se crea una imagen nueva que remplaza la actual del programa que se esta ejecutando.
@@ -198,7 +198,7 @@ variable `errno` con el codigo de error correspondiente:
                         for writing or reading by some process.
 ```
 
-### access( )
+### access
 
 La función `access()` en C se utiliza para verificar si un archivo o directorio tiene ciertos permisos específicos. 
 Permite determinar si el usuario actual tiene permisos para leer, escribir o ejecutar un archivo o directorio.
@@ -245,7 +245,7 @@ En este ejemplo, se verifica si el archivo "archivo.txt" es legible y escribible
 Si los permisos están disponibles, se muestra un mensaje indicando que el archivo es legible y escribible. 
 De lo contrario, se imprime un mensaje de error utilizando `perror()`.
 
-### perror( )
+### perror
 
 La funcion `perror( )` desribe un mensaje de error por la salida estandard. Recibe como argumento una cadena de caracteres que se
 utilizara como prefijo en el mensaje de error.
