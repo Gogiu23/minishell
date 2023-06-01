@@ -4,7 +4,7 @@
 
 ## Tabla de contenido
 * [Funciones](#Funciones)
-    * [fork](#fork( ))
+    * [fork](#fork(_))
     * [pipe](#pipe)
     * [execve](#execve)
     * [access](#access)
