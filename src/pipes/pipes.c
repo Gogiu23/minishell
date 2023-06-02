@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:17:24 by vduchi            #+#    #+#             */
-/*   Updated: 2023/06/02 11:22:57 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/06/02 13:31:29 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	pipes(t_minishell *tokens, char *env[])
 //	    printf("\n");
 	    tmp = tmp->next;  // Avanzar al siguiente nodo de la lista
 	}
-	if (check_command(tokens, env) == 0)
+	if (check_command(tokens) == 0)
 		res = run_commands(tokens->command, env);
 	else
 		ft_putstr_error("BUILTIN pending manage\n");

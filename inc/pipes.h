@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:18:34 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/31 16:11:00 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/06/02 13:31:37 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,10 @@ typedef struct s_command
 typedef struct s_minishell
 {
 	char		**path;
-	char		*b_path;
 	t_command	*command;
 }	t_minishell;
 
-int		check_command(t_minishell *comands, char **env);
+int		check_command(t_minishell *comands);
 
 /* ---		Run_command.c		--- */
 int		run_commands(t_command *token, char *env[]);

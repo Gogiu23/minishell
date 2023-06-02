@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 16:05:24 by vduchi            #+#    #+#             */
-/*   Updated: 2023/06/02 11:21:09 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/06/02 13:31:18 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,8 @@ static int is_builtin(char *str)
 	return (0);
 }
 
-int check_command(t_minishell *cmd, char **env)
+int check_command(t_minishell *cmd)
 {
-	(void)env;
 	char	*str = cmd->command->args[0];
 	if (is_builtin(str) == 0)
 		return (0);
@@ -68,25 +67,28 @@ static	int	is_cmd(t_command *token)
 int	run_commands(t_command *token, char *env[])
 {
 	pid_t	pid;
-	int		exit_status;
+//	int		exit_status;
 	int		status;
 
-	if ((pid = fork()) == 0)
+	pid = fork();
+	if (pid == 0)
 	{
 		if (is_cmd(token) == 0)
 			execve("/bin/cat", token->args, env);
-//		printf("errno: %d\n", errno);
-		perror("Error execve");
-		return (1);
+		printf("errno: %d\n", errno);
+//		perror("Error execve");
+		exit (0);
 	}
 	else if (pid > 0)
 	{
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-		{
-			exit_status = WIFEXITED(status);
+		write (1, "Before\n", 7);
+		printf("Return value %d\n", waitpid(pid, &status, 0));
+		write (1, "After\n", 6);
+//		if (WIFEXITED(status))
+//		{
+//			exit_status = WEXITSTATUS(status);
 //			printf("Codice uscita child: %d\n", exit_status);
-		}
+//		}
 	}
 	else
 	{
