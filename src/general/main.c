@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 16:12:32 by vduchi            #+#    #+#             */
-/*   Updated: 2023/06/01 20:56:42 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/06/02 11:18:22 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ static	void	minishell(char *str, char **env)
 	if (!tokens)
 		ft_putstr_error("Malloc error\n");
 	pipes(tokens, env);
-	printf("Token %p\n", tokens);
+//	printf("Token %p\n", tokens);
 }
 
 static void	siginthandler(int sig)
 {
-	(void)sig;
+	printf("\nSig: %d\n", sig);
 	exit (0);
 }
 
@@ -60,6 +60,8 @@ int	main(int argc, char *argv[], char *env[])
 			signal(SIGINT, siginthandler);
 			string = readline("\033[1;32m min\033[1;37"
 					"mis\033[1;31mhell\033[0;0m> ");
+			if (!string)
+				break ;
 			if (string[0] != '\0')
 			{
 				minishell(string, env);

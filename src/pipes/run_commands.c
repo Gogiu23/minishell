@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 16:05:24 by vduchi            #+#    #+#             */
-/*   Updated: 2023/06/01 21:37:27 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/06/02 11:21:09 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ static int is_builtin(char *str)
 	else if (!ft_strncmp("export", str, 6))
 		return (4);
 	else if (!ft_strncmp("unset", str, 5))
-		return (5);
-	
+		return (5);	
 	else if (!ft_strncmp("env", str, 3))
 		return (6);
 	else if (!ft_strncmp("exit", str, 4))
@@ -76,7 +75,7 @@ int	run_commands(t_command *token, char *env[])
 	{
 		if (is_cmd(token) == 0)
 			execve("/bin/cat", token->args, env);
-		printf("errno: %d\n", errno);
+//		printf("errno: %d\n", errno);
 		perror("Error execve");
 		return (1);
 	}
@@ -86,7 +85,7 @@ int	run_commands(t_command *token, char *env[])
 		if (WIFEXITED(status))
 		{
 			exit_status = WIFEXITED(status);
-			printf("Codice uscita child: %d\n", exit_status);
+//			printf("Codice uscita child: %d\n", exit_status);
 		}
 	}
 	else
