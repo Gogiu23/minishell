@@ -9,6 +9,7 @@
     * [execve](#execve)
     * [access](#access)
     * [perror](#perror)
+    * [dup2](#dup2)
 
 ## Funciones
 
@@ -283,3 +284,65 @@ int main() {
 
 > Si quieremos ver el valor de ***errno*** podemos escribir en bash `echo $?` y tendremos el valor actual de la variable 
 `ERRNO`.
+
+### dup2
+
+ La funcion `dup2()` se utiliza para redireccionar un descriptor de archivo existente a otro descriptor de archivo. Permite que dos
+ descriptores apunten al mismo archivo.
+
+ > Declaracion
+
+ ```c
+ int dup2(int oldf, int newfd);
+ ```
+- ***oldfd*** es el descriptor de archivo existente que se desea duplicar
+- ***newfd*** es el descriptor de archivo que deseas que oldfd apunte.
+
+> Return
+
+El valor de return de `dup2()` es el ***nuevo descriptor*** de archivo duplicado si la operacion es exitosa. 
+Devuelve **-1** si se produce **error**
+
+>Ejemplo
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+int main() {
+    int fileDescriptor = open("output.txt", O_WRONLY | O_CREAT | O_TRUNC, 0666);
+    if (fileDescriptor == -1) {
+        perror("Error al abrir el archivo");
+        return 1;
+    }
+
+    int savedStdout = dup(STDOUT_FILENO);
+    if (savedStdout == -1) {
+        perror("Error al duplicar el descriptor de archivo");
+        return 1;
+    }
+
+    if (dup2(fileDescriptor, STDOUT_FILENO) == -1) {
+        perror("Error al redirigir la salida estándar");
+        return 1;
+    }
+
+    printf("Esta salida será redirigida al archivo.\n");
+
+    fflush(stdout);
+    close(fileDescriptor);
+    dup2(savedStdout, STDOUT_FILENO);
+    printf("La salida estándar ha sido restaurada.\n");
+
+    return 0;
+}
+```
+- La funcion open se utiliza para abrir el archivo llamado "output.txt" A continuacion `dup()` se utiliza para duplicar el
+descriptor de archivo de la salida estandard (**stdout**) y se guarda en **savedStdout** para poder restaurarlo mas tarde.
+- `dup2()` se utiliza para redirigir el descriptor de archivo `fileDescriptor` (el archivo "output.txt") a la salida
+estandard. Despues de esto, cualquier salida generada con `printf()` se escribira en el archivo en lugar de la 
+pantalla.
+- Para restaurar la salida estandar se puede utilizar `dup2(savedStdout, STDOUT_FILENO)`
+- **A TENER EN CUENTA** = `dup2()` cerrara automaticamente el descriptor de archivo `newfd` si ya esta abierto antes de la 
+duplicacion, por lo que no es necesario cerrarlo manualmente antes de llamar a `dup2()`.
