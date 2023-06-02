@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:14:15 by vduchi            #+#    #+#             */
-/*   Updated: 2023/05/19 17:53:31 by gdominic         ###   ########.fr       */
+/*   Updated: 2023/06/02 13:42:53 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdio.h>
 # include "pipes.h"
 # include "built-ins.h"
+# include "parser.h"
 # include "../readline/library/include/readline/readline.h"
+# include "../readline/library/include/readline/history.h"
 
 #endif
