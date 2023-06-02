@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 16:12:32 by vduchi            #+#    #+#             */
-/*   Updated: 2023/06/02 13:47:47 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/06/02 16:12:04 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	minishell(t_minishell *tokens, char *env[], char *str)
 		exit (1);
 	}
 	tokens->command = add_elem(matrix[0], matrix);
-	if (!tokens)
+	if (!tokens->command)
 	{
 		free(tokens);
 //		free(matrix);	// free a double pointer
@@ -85,13 +85,16 @@ static t_minishell	*init_struct(char *env[])
 	tokens = (t_minishell *)malloc(sizeof(t_minishell));
 	if (!tokens)
 	{
+		printf("Here\n");
 		perror("Malloc error");
 		exit (1);
 	}
 	tokens->path = ft_split(ft_find_path(env), ':');
-	{if (!tokens->path)
+	if (!tokens->path)
+	{
 		free(tokens);
 		tokens = NULL;
+		printf("2\n");
 		perror("Malloc error");
 		exit (1);
 	}
